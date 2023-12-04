@@ -1,5 +1,7 @@
 # coding=utf-8
 import sqlite3
+import os
+from fichier import Fichier
 import sys
 import re
 from model import Model
@@ -57,6 +59,16 @@ class Mycommandline(Model):
         azerty={}
         azerty["mycommandline_id"]=myid
         azerty["notice"]="votre mycommandline a été ajouté"
+        matermin=params["name"].split(".")[-1]
+        myprogram=""
+        if matermin == "rb":
+            myprogram="ruby"
+        if matermin == "php":
+            myprogram="php"
+        if matermin == "py":
+            myprogram="python3"
+        monfichier=Fichier("./monscript","lancer_"+params["name"]+".sh").ecrire("""xterm -l -hold -e "cd {myroot}/monscript && echo 'c\'est mon script' && bash -l -c '{program} ./{name}'"
+                """.format(myroot=os.getcwd(), name=params['name'],program=myprogram))
         return azerty
 
 

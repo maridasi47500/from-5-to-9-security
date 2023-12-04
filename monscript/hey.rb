@@ -1,0 +1,1 @@
+xterm -l -hold -e "cd #{Rails.root.to_s}/lib/assets && echo 'entrez le mot de passe et entrez rails s' && bash -l -c 'sh ./script.sh'p "OK"

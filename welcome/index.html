@@ -1,9 +1,14 @@
 <div id="myid"></div>
+<form action="/monscript" method="post">
 <div class="field">
 <label>nom de mon script</label>
-<input required type="text" pattern="[A-Za-z '-.]*[A-Za-z'-.]\s[.](?:(?:py|rb|php)$)" name="name" />
+<input required type="text" pattern="[A-Za-z '-.]*[A-Za-z'-.][.](?:(?:py|rb|php)$)" name="name" />
 </div>
 <div class="field">
 <label>contenu de mon script</label>
-<textarea></textarea>
+<textarea name="content"></textarea>
 </div>
+<div class="action">
+<input type="submit" name="valider" value="valide" />
+</div>
+</form>

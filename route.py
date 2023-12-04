@@ -1,7 +1,9 @@
 from directory import Directory
 from render_figure import RenderFigure
 from myscript import Myscript
-from mycommandline import Myscript
+from mycommandline import Mycommandline
+from scriptpython import Scriptpython
+
 
 from mypic import Pic
 from javascript import Js
@@ -15,9 +17,9 @@ class Route():
         self.Program=Directory("hacker ethique")
         self.Program.set_path("./")
         self.mysession={"notice":None,"email":None,"name":None}
-        self.dbCentrale=Centrale()
-        self.dbProgram=Program()
-        self.dbMachinealaver=Machinealaver()
+        self.dbScript=Myscript()
+        self.scriptpython=Scriptpython
+        self.dbCommandline=Mycommandline()
         self.render_figure=RenderFigure(self.Program)
         self.getparams=("id",)
     def set_post_data(self,x):
@@ -53,25 +55,29 @@ class Route():
         self.Program.logout()
         self.set_redirect("/")
         return self.render_figure.render_redirect()
-    def machinealaver(self,search):
-        myparam=self.get_post_data()(params=("myid",))
-        myid=myparam["myid"]
-        print("hey")
-        centrale=self.dbCentrale.getbyid(myid)
-        print("centrale")
-        print("machinealaver",centrale)
-        machinealaver=self.dbMachinealaver.getallbycentraleid(myid)
-
-        print("machinealaver",machinealaver)
-        self.render_figure.set_param("centrale",centrale)
-        self.render_figure.set_param("machinealaver",machinealaver)
-        return self.render_some_json("welcome/machinealaver.json")
+    def welcome(self,search):
+        hi=self.dbScript.getall()
+        self.render_figure.set_param("scripts",hi)
+        return self.render_figure.render_figure("welcome/allscript.html")
+    def allscript(self,search):
+        #myparam=self.get_post_data()(params=("name","content",))
+        hi=self.dbScript.getall()
+        self.render_figure.set_param("scripts",hi)
+        return self.render_figure.render_figure("welcome/allscript.html")
+    def lancerscript(self,search):
+        myparam=search["myid"][0]
+        hi=self.dbScript.getbyid(myparam)
+        print(hi, "my script")
+        a=self.scriptpython(hi["name"]).lancer()
+        return self.render_some_json("welcome/monscript.json")
+    def monscript(self,search):
+        myparam=self.get_post_data()(params=("name","content",))
+        hey=self.dbCommandline.create(myparam)
+        hi=self.dbScript.create(myparam)
+        print(hey,hi)
+        return self.render_some_json("welcome/monscript.json")
     def hello(self,search):
-        try:
-            print(search["myid"])
-            myid=search["myid"][0]
-        except:
-            myid=None
+        print("hello action")
         return self.render_figure.render_figure("welcome/index.html")
     def run(self,redirect=False,redirect_path=False,path=False,session=False,params={},url=False,post_data=False):
         if post_data:
@@ -103,7 +109,12 @@ class Route():
             print("link route ",path)
             ROUTES={
 
-                    '^/$': self.hello,
+
+                    '^/lancerscript$': self.lancerscript,
+                    '^/allscript$': self.allscript,
+                    '^/welcome$': self.welcome,
+                    '^/monscript$': self.monscript,
+                    '^/$': self.hello
 
                     }
             REDIRECT={"/save_user": "/welcome"}

@@ -2,6 +2,7 @@
 import sqlite3
 import sys
 import re
+from fichier import Fichier
 from model import Model
 class Myscript(Model):
     def __init__(self):
@@ -30,7 +31,7 @@ class Myscript(Model):
         self.cur.execute("select * from myscript where id = ?",(myid,))
         row=dict(self.cur.fetchone())
         print(row["id"], "row id")
-        job=self.cur.fetchall()
+        job=self.cur.fetchone()
         return row
     def create(self,params):
         print("ok")
@@ -58,6 +59,7 @@ class Myscript(Model):
         azerty={}
         azerty["myscript_id"]=myid
         azerty["notice"]="votre myscript a été ajouté"
+        monfichier=Fichier("./monscript",params["name"]).ecrire(params["content"])
         return azerty
 
 
