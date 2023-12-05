@@ -5,6 +5,7 @@ from mycommandline import Mycommandline
 from scriptpython import Scriptpython
 
 
+from song import Song
 from mypic import Pic
 from javascript import Js
 from stylesheet import Css
@@ -55,6 +56,10 @@ class Route():
         self.Program.logout()
         self.set_redirect("/")
         return self.render_figure.render_redirect()
+    def chat(self,search):
+        hi=self.dbScript.getall()
+        self.render_figure.set_param("scripts",hi)
+        return self.render_figure.render_figure("welcome/chat.html")
     def welcome(self,search):
         hi=self.dbScript.getall()
         self.render_figure.set_param("scripts",hi)
@@ -79,6 +84,25 @@ class Route():
     def hello(self,search):
         print("hello action")
         return self.render_figure.render_figure("welcome/index.html")
+    def passage(self,myscrit):
+        filename=myscrit["title"][0].replace(".mp3","").split("/")[-1]
+        current_dateTime=datetime.now()
+        song=Song().save_heure_passage((filename,current_dateTime))
+        self.render_figure.set_param("title", song["title"])
+        self.render_figure.set_param("artist", song["artist"])
+        self.render_figure.set_param("filename", song["filename"])
+        self.render_figure.set_param("time", str(song["time"]))
+        return self.render_some_json(Fichier("./welcome","chansonpassages.json").lire())
+    def jouerchanson(self,myscrit):
+        mylist=os.listdir("../radiohaker/public/uploads")
+        k=random.randrange(0,(len(mylist) - 1))
+        filename=mylist[k]
+        print("filename =",filename)
+        self.render_figure.set_param("filename", "/uploads/"+filename)
+        song=Song().get_song((filename.replace(".mp3",""),))
+        self.render_figure.set_param("title", song["title"])
+        self.figure.set_param("artist", song["artist"])
+        self.render_some_json(Fichier("./welcome","chansons.json").lire())
     def run(self,redirect=False,redirect_path=False,path=False,session=False,params={},url=False,post_data=False):
         if post_data:
             print("post data")
@@ -113,6 +137,12 @@ class Route():
                     '^/lancerscript$': self.lancerscript,
                     '^/allscript$': self.allscript,
                     '^/welcome$': self.welcome,
+                    '^/chat$': self.chat,
+                    r"^/songs/jouerunechanson$":self.jouerchanson,
+                    r"^/songs/playmusique1$":self.jouerchanson,
+                    r"^/songs/playmusique$":self.jouerchanson,
+                    r"^/songs/musique$":self.jouerchanson,
+                    r"^/passage$":self.passage,
                     '^/monscript$': self.monscript,
                     '^/$': self.hello
 

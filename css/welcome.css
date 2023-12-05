@@ -1,0 +1,21 @@
+
+.myboutons {
+	text-align: center;
+	padding: 41px;
+}
+a.monbouton:link, a.monbouton:visited, a.monbouton:hover, a.monbouton:active {
+	text-decoration: none;
+	border:3px solid black;
+	padding: 14px;
+	color: black;
+        text-transform: uppercase;
+}
+.noel {
+    background: transparent url('http://localhost:8081/uploads/flocon.png');
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    position: absolute;
+    background-position: center;
+    background-size: 100% 100%;
+}

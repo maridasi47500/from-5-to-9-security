@@ -1,0 +1,522 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+.navbar-toggler.ijijijkijiji, .navbar-toggler.ijijijkijiji:link, .navbar-toggler.ijijijkijijii:visited, .navbar-toggler.ijijijkijiji:active, .navbar-toggler.ijijijkijiji, .navbar-toggler.ijijijkijiji:active:focus {
+	display: block;
+	color: red;
+	border: 0px solid black;
+	font-size: 30px;
+	font-weight: 900;
+	/* border-style: hidden; */
+	outline: none !important;
+	box-shadow: none;
+}
+#navbarSupportedContent {
+	float: right;
+	right: 0;
+	text-align: right;
+	position: absolute;
+}
+.navbar-brand.iuyghkuygh {
+	margin: 0 auto;
+}
+#overlayspinner {
+  position: fixed; /* Sit on top of the page content */
+  display: none; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 2; 
+  cursor: pointer; /* Add a pointer on hover */
+}
+#textspinner{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
+  color: white;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+}
+#overlay {
+	position: fixed;
+	display: none;
+	width: 30%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.5);
+	z-index: 2;
+	cursor: pointer;
+	border: 1px solid #c1c1c1;
+}
+#text {
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 20px;
+	color: black;
+	/* transform: translate(-50%,-50%); */
+	-ms-transform: translate(-50%,-50%);
+	background: black;
+	width: 100%;
+	height: 100%;
+}
+.menusliding {
+	animation-name: mymenusliding;
+	animation-duration: 1s;
+
+}
+.closeme {
+	animation-name: mymenuclosing;
+	animation-duration: 1s;
+
+}
+@keyframes mymenuclosing {
+    from {
+        transform: translate(0px) rotate(0deg);
+    }
+    to {
+        transform: translate(-100vw) rotate(0deg);
+    }
+}
+@keyframes mymenusliding {
+    from {
+        transform: translate(-100vw) rotate(0deg);
+    }
+    to {
+        transform: translate(0px) rotate(0deg);
+    }
+}
+.closemenu {
+	color: red;
+	font-size: 20px;
+	font-weight: 900;
+	float: right;
+}
+.closemenu:hover {
+	transform:rotate(-60deg);
+}
+.sub > li {
+    height: 0;
+    overflow: hidden;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    display: none
+}
+input:checked + .sub > li {
+    height: 2em;
+}
+.sub > li {
+    transition: all 0.25s ease-in-out 
+}
+.sub > li {
+    height: 0;
+    padding: 0;
+    transition: all 0.25s ease-in-out;
+}
+input:checked + .sub > li {
+    padding: 0.7em 1em
+    height: 1.4em
+	background: red;
+	color: white;
+    opacity: 1
+}
+
+label  {
+	background: black;
+	color: white;
+}
+label span {
+	background: red;
+	color: white;
+	font-weight: 900;
+	border-radius: 999999999px;
+	min-width: 30px;
+	display: inline-block;
+	text-align: center;
+	line-height: 28px;
+	vertical-align: middle;
+	margin-left: 10px;
+	font-size: 30px;
+	height: 30px;
+}
+.mynavaudio {
+	height: 100px;
+	background: #AA4A44;
+}
+#trapeze {
+	border-top: 100px solid red;
+	border-left: 0px solid transparent;
+	border-right: 25px solid transparent;
+	width: 840px;
+	margin: 0 auto;
+	display: block;
+	position: relative;
+}
+#trapeze .chanson {
+	float: left;
+	position: relative;
+	width: 26%;
+}
+.chansons{
+    width:46%;
+}
+.chanson h6, .chanson span {
+	display: block;
+	clear: both;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.chanson h6 {
+	line-height: 10px;
+	margin: 10px 0 10px 0;
+	/* margin-bottom: 10px; */
+      
+}
+.precedent, .encours,.avenir {
+	float: left;
+	top: -100px;
+
+}
+.mycontent{
+    clear:both;
+}
+#trapeze .chanson {
+    margin: 10px 0 10px 0;
+    font-size:14px;
+    padding:5px;
+}
+.mysongsselect  {
+	width:100%;
+}
+
+.mysongsselect option {
+	height: 20px;
+	border: 2px grey solid;
+}
+#text {
+    overflow-y:scroll;
+}
+#trapeze .slidecontainer {
+	top: -60px;
+	position: absolute;
+	left: 360px;
+}
+.sub a {
+	text-decoration:none;
+}
+@charset "utf-8";
+/* CSS Document */
+.slidecontainer {
+    width: 450px;
+	height: 40px;
+	display:flex;
+	justify-content: space-around;
+	align-items: center;
+	background-color:red;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 200px;
+    height: 10px;
+    background: #A7A5A5;
+    outline: none;
+}
+
+.slider:hover {
+background: #6E6E6E;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+	border: 2px #000 solid;
+    background: #3D3D3D;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+	border: 2px #000 solid;
+    background: #3D3D3D;
+    cursor: pointer;
+}
+
+#myVol{width: 100px;}
+      h4 {
+            display: flex;
+            flex-direction: row;
+        }
+          
+h4:before, h4:after {
+     content: "";
+     flex: 1 1;
+     border-bottom: 2px solid #000;
+     margin: auto;
+}
+.mybreadcrumb {
+	background: red;
+	margin: 50px;
+	padding: 10px;
+	text-align: center;
+	color: white;
+}
+.mybreadcrumb li {
+	margin: 0 auto;
+}
+ul.mybreadcrumb {
+  text-align: center;
+  padding: 23px;
+}
+.mybreadcrumb li {
+  display: inline;
+}
+.mybreadcrumb li::after {
+  /*
+   This has to be space, tab or other
+   breakable white-space character:
+  */
+  content: " ";
+  word-spacing: 1em;
+  background-image: linear-gradient(
+    -0.2turn,
+    transparent 0 calc(50% - 0.03em),
+    currentcolor 0 calc(50% + 0.03em),
+    transparent 0
+  );
+}
+.col-md-12 {
+	text-align: center;
+}
+.col-xs-12.col-md-4.col-md-offset-4 {
+	margin: 0 auto;
+}
+.form-group.gutter-h {
+	text-align: center;
+}
+.form-group.historique-form.gutter-h > div, .form-group.historique-form.gutter-h > button {
+    display:inline;
+}
+.dialog {
+	color: red;
+	font-size: 20px;
+	text-align: center;
+}
+.newsarticleitem {
+	list-style-type: none;
+}
+.figure-listview {
+	float: left;
+}
+.mytitle a, .mytitle a:visited, .mytitle a:link, .mytitle a:hover {
+	color: red;
+	text-decoration: none;
+	font-size: 20px;
+	float: left;
+}
+.myjob a, .myjob a:visited, .myjob a:link, .myjob a:hover {
+	text-decoration: none;
+	font-size: 16px;
+        color:black;
+	float: left;
+}
+.wm-album-options a {
+	text-decoration: none;
+	background: red;
+	color: white;
+	padding: 5px;
+}
+p.mytext {
+	box-sizing: border-box;
+	text-align: left;
+	float: left;
+	width: 100%;
+}
+.wm-album-options {
+	text-align: left;
+}
+.wm-album-medium-text {
+	padding-left: 310px;
+}
+.wm-album-options {
+	padding-left: 0;
+}
+.wm-album-options li {
+	list-style-type: none;
+}
+.wm-hoverlink.wm-color {
+    position:absolute;
+    display:none;
+}
+.wm-hoverlink.wm-color img {
+    
+    width:50px;
+    height:50px;
+    float:left;
+    
+    top:0;
+    
+    
+}
+.wm-hoverlink.wm-color.hoverme {
+    animation-name: slideIn;
+    animation-duration:1s;
+     display:block;
+     top:50px;
+     background:grey;
+     border-radius:777777px;
+     padding:20px;
+     transform: translateX(95px);
+}
+.figure-listview {position:relative;}
+@keyframes slideIn {
+  0% {
+    transform: translateX(0px) rotate(0deg);
+    color: red;
+    display:block;
+  }
+  100% {
+    transform: translateX(95px) rotate(0deg);
+    color: green;
+    display:block;
+  }
+}
+
+.wm-page-heading.text-left {
+	/* text-align: center; */
+	padding-left: 103px;
+}
+.col-xs-12.col-md-5, .col-xs-12.col-md-7.item-teaser, .wm-blog-text.article-light.article-bg-grey {
+	float: left;
+}
+.col-xs-12.col-md-7.item-teaser {
+	padding-left: 83px;
+	font-size: 20px;
+}
+.col-xs-12.col-md-7.item-teaser h2 {
+	font-size: 20px;
+        color:red;
+}
+.wm-page-heading.text-left {
+	color: #555;
+}
+.blog-post-options {
+	font-size: 14px;
+}
+.blog-post-options li {
+	float: left;
+	margin-left: 30px;
+}
+.wm-main-section.wm-contact-us-home li {
+    list-style-type: none;
+}
+.wm-main-section.wm-contact-us-home {
+	background: red;
+	list-style-type: none;
+	font-size: 20px;
+	color: white;
+}
+.fa.fa-home::after {
+	content: "\2302";
+}
+.fa.fa-phone::after{
+    content:"\260E"
+}
+.fa.fa-print::after{
+    content:"\2399"
+    
+}
+.fa.fa-email::after{content:"\2709"}
+.col-sm-3 {
+	text-align: center;
+}
+.fa {
+	background: white;
+	padding: 30px;
+	display: inline-block;
+	font-size: 49px;
+	border-radius: 8888888888px;
+	margin: 10px;
+	line-height: 30px;
+	width: 92px;
+	color: red;
+	text-align: center;
+}
+.wm-footer-spot-section {
+	background: #555;
+	color: white;
+}
+.wm-newsletter-section {
+	/* top: 40px; */
+	margin-top: 40px;
+	border: 1px solid white;
+	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+#submit-newsletter {
+	clear: left;
+	display: block;
+	text-align: center;
+	/* padding: 0 auto; */
+	margin: 0 auto;
+	box-sizing: border-box;
+	/* float: left; */
+	position: relative;
+	background: red;
+	border: red;
+	color: white;
+	padding: 10px;
+	text-transform: uppercase;
+}
+.wm-footer-social-media fa {
+    
+}
+.wm-footer-social-media li {
+	float: left;
+}
+.application-list {
+	display: flex;
+}
+.wm-footer-icons.even-items {
+	display: contents;
+}
+.wm-footer-social-media li {
+	list-style-type: none;
+}
+.pull-right {
+	float: right;
+}
+.wm-album-medium-text {
+	padding-bottom: 50px;
+}
+nav{
+background-color:blue;
+}

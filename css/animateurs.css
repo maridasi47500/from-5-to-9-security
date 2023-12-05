@@ -1,0 +1,62 @@
+.figure-animateurs {
+	float: left;
+}
+.wm-artist-text {
+	display: flow-root;
+	padding-left: 54px;
+	text-align: left;
+}
+.wm-artist-title {
+	border-bottom: 1px solid red;
+	margin-bottom: 20px;
+}
+.wm-artist-title .fa {
+	width: 20px;
+	font-size: 23px;
+}
+.wm-album-medium-text .fa {
+	float: left;
+	font-size: 20px;
+	padding: 0;
+	margin: 0;
+	display: inline;
+        width:20px;
+}
+.wm-blog-heading {
+	color: red;
+	border-bottom: 1px solid;
+	margin-bottom: 21px;
+	padding-bottom: 0px;
+	/* line-height: -20px; */
+}
+.wm-blog-heading h2 {
+	margin-bottom: 0px;
+}
+.wm-simple-facny-title {
+	color: red;
+}
+.wm-recent-releases-text time {
+	float:left;
+}
+.wm-recent-releases-text a:link, .wm-recent-releases-text a:visited {
+	font-size: 20px;
+	text-decoration: none;
+	color: red;
+}
+
+
+.social {
+	bottom: 0;
+	position: absolute;
+	right: 0;
+}
+.wm-album-medium-text {
+	position: relative;
+}
+.myjob {
+	float: left;
+	width: 100%;
+}
+.sub{
+background-color:red;
+}

@@ -1,0 +1,80 @@
+.figure-emissions.h-auto {
+	text-align: left;
+	width: 50%;
+	float: left;
+}
+.wm-artist-title a {
+	color: black;
+	text-decoration: none;
+	text-align: center;
+}
+.wm-artist-title {
+	text-align: center;
+}
+.wm-artist-slider-layer {
+	max-width: 250px;
+	border-bottom: 0px solid black;
+}
+.wm-artist-slider-layer .wm-artist-title {
+    border:0px solid black;
+}
+.col-md-12 {
+	list-style-type: none;
+}
+.fc-day-header.fc-widget-header.fc-sun {
+	background: black;
+	color: white;
+}
+.fc-day-header.fc-widget-header.fc-sun a:link, .fc-day-header.fc-widget-header.fc-sun a:visited {
+	color: white;
+}
+.fc-day-header.fc-widget-header.fc-sun a.active:link, .fc-day-header.fc-widget-header.fc-sun.active a.active:visited {
+        background:red;
+}
+.col-md-2.emission-duree.hidden-xs  {
+    display:none
+}
+.timeline-time.visible-xs {
+	color: red;
+	font-size: 40px;
+	width: 30%;
+	text-align: left;
+	border-bottom: 1px solid #000;
+	line-height: 0.1em;
+	margin: 44px 0 51px;
+	float: left;
+	/* margin-right: 89px; */
+}
+.col-md-10.emission-info.col-xs-12 > * {
+	display: inline;
+	/* width: 30%; */
+}
+.emission-txt h2 {
+	font-size: 20px;
+	float: left;
+	color: red;
+}
+.emission-txt > p {
+	text-align: left;
+}
+.emission-txt {
+	position: relative;
+}
+.emission-link {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	/* bottom: -90px; */
+	right: 0px;
+}
+.emission-img {
+	float: left;
+}
+.emission-txt {
+	display: contents;
+}
+
+
+
+
+

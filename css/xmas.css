@@ -1,0 +1,76 @@
+.xmas-tree{
+width:300px;
+height:500px;
+position:relative;
+}
+.xmas-pic{
+width:100%;
+height:100%;
+
+}
+.xmas-tree span {
+border-radius:8888888px;
+width:30px;
+height:30px;
+position:absolute;
+
+}
+.xmas-tree span.yellow {
+border-radius:8888888px;
+width:30px;
+height:30px;
+background:yellow;
+left:20%;
+top:40%;
+
+}
+.xmas-tree span.boule2 {
+left:70%;
+top:70%;
+
+}
+.xmas-tree span.yellow.hey {
+animation:myyellow;
+animation-duration:2s;
+animation-iteration-count:infinite;
+
+}
+@keyframes myyellow{
+0%, 100%{
+background:linear-gradient(yellow,white);
+}
+50%{
+background:yellow;
+}
+}
+.xmas-tree span.blue.hey {
+animation:myblue;
+animation-duration:1s;
+animation-iteration-count:infinite;
+
+}
+@keyframes myblue{
+0%, 100%{
+background:linear-gradient(blue,white);
+}
+50%{
+background:blue;
+}
+}
+.xmas-tree span.blue {
+border-radius:8888888px;
+width:30px;
+height:30px;
+background:blue;
+left:50%;
+top:50%;
+
+}
+.xmas-tree span.boule3 {
+left:70%;
+top:50%;
+
+}
+#hey{
+display:block;
+}

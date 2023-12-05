@@ -14,6 +14,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	        <link href="/css/animateurs.css" rel="stylesheet" />
+		    <link href="/css/emissions.css" rel="stylesheet" />
+		        <link href="/css/welcome.css" rel="stylesheet" />
+			    <link href="/css/application.css" rel="stylesheet" />
+			        <link href="/css/recordings.css" rel="stylesheet" />
+				    <link href="/css/xmas.css" rel="stylesheet" />
 
    
 
@@ -90,15 +98,198 @@
 
 
 <body>
-	<a href="/">welcome</a>
-	<div id=output>Here you should see the typed text in UPPER case</div>
-
-	<input type=text id=entry value="type something"/>
-	    <button onclick="sendMove(websocket);">Click Here</button>
 	     
+    <nav class="navbar navbar-expand-lg bg-body-tertiary iutyh_uy-rt" >
+  <div class="container-fluid" style="background-color:blue;">
+
+    <button class="navbar-toggler ijijijkijiji" type="button" data-bs-toggle="" data-bs-target="" aria-controls="" aria-expanded="false" aria-label="Toggle navigation">
+      &#9776;
+    </button>
+    <a class="navbar-brand iuyghkuygh" href="/"></a>
+    <div class="collapse navbar-collapse azertyu" id="navbarSupportedContent">
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Recherche">
+        <button class="btn btn-outline-success" type="submit">Rechercher</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<nav class="mynavaudio">
+  <div id="trapeze">
+      <div class="chansons">
+    <div class="chanson precedent"></div>
+    <div class="chanson encours"></div>
+    <div class="chanson avenir"></div>
+      </div>
+    <div class="slidecontainer"> <img src="/img/play.png" width="33" height="34" alt="play pause" id="goButton"/>
+<input type="range" min="0" max="100" value="0" class="slider"  id="myRange">
+<img src="/img/soundOff.png" width="18" height="19" alt=""/>
+<input type="range" min="0" max="100" value="100" class="slider" id="myVol">
+</div>
+  </div>
+</nav>
+<main class="mycontent">
+    {plusdemot}
+</main>
+ <div id="overlayspinner">  <div id="textspinner">LE SITE DE radio est train de charger</div></div>
+ <div id="overlay" class="monmenu menusliding">  
+
+   <div id="text"><ul>
+   <span class="closemenu">&#10060;</span>
 
 
-{plusdemot}
+
+     </ul>
+     <ul class="accordion">
+       <li class="menu"><a href="/">Accueil</a></li>
+
+  <li class="has-sub">
+    <label for="menu2">RADIO <span>+</span></label>
+    <input id="menu2" type="checkbox" name="menu" onchange="$('[for='+this.id+'] span').html(this.checked ? '-' : '+');" />
+    <ul class="sub">
+    </ul>
+  </li>
+  <li class="has-sub">
+    <label for="menu3">JEUX<span>+</span></label>
+    <input id="menu3" type="checkbox" name="menu" onchange="$('[for='+this.id+'] span').html(this.checked ? '-' : '+');" />
+    <ul class="sub">
+      <li>La playlist radio</li>
+      <li><a href="/xmas">xmas</a></li>
+      <li><a href="/chat">chat</a></li>
+    </ul>
+  </li>
+
+  <li class="has-sub">
+    <label for="menu4">PODCASTS<span>+</span></label>
+    <input id="menu4" type="checkbox" name="menu" onchange="$('[for='+this.id+'] span').html(this.checked ? '-' : '+');" />
+    <ul class="sub">
+      <li>La playlist Vidéo</li>
+    </ul>
+    
+  </li>
+  <li class="has-sub">
+    <label for="menu1">L'ACTU <span>+</span></label>
+    <input id="menu1" type="checkbox" name="menu" onchange="$('[for='+this.id+'] span').html(this.checked ? '-' : '+');" />
+    <ul class="sub">
+    </ul>
+  </li>
+  <li class="has-sub">
+    <label><a href="contact">CONTACT</a></label>
+    
+  </li>
+  <li class="has-sub">
+    <label><a href="pub">LA PUB</a></label>
+    
+  </li>
+</ul>
+   </div></div>
+
+
+<footer id="wm-footer" class="footer-four">
+
+    <!--// Footer Widget \\-->
+    <div class="wm-footer-widgets">
+        <div class="container">
+            <div class="row">
+                                                    
+                                    <aside class="col-sm-12">
+    <div id="ad_footer_300_250">
+        <!-- radio GUYANE - 300x250 footer -->
+My AD!!    </div>
+</aside>
+                                    
+                            </div>
+        </div>
+    </div>
+    <!--// Footer Widget \\-->
+
+    <!--// Main Section \\-->
+    <div class="wm-main-section wm-contact-us-home">
+        <div class="container">
+            <div class="row">
+                    <div class="wm-contact-us-info">
+                        <ul class="row">
+                                                                                    <li class="col-sm-3">
+                                <a class="contact-icon-bubble" href="#"><i class="fa fa-home"></i></a>											
+                                <p class="contact-txt">adresse radio</p>
+                            </li>
+                                                                                    <li class="col-sm-3">
+                                <a class="contact-icon-bubble" href="tel:0825825696"><i class="fa fa-phone"></i></a>
+                                <p class="contact-txt">0800000000</p>
+                            </li>
+                                                                                    <li class="col-sm-3">
+                                <a class="contact-icon-bubble" href="#"><i class="fa fa-print"></i></a>											
+                                <p class="contact-txt">0825825696</p>
+                            </li>
+                                                                                    <li class="col-sm-3">
+                                <a class="contact-icon-bubble no-listen-onclick" href="mailto:contact@radio.fm">                          <i class="fa fa-email"></i></a>
+                                <p class="contact-txt">contact@radio.fm</p>
+                            </li>
+                            										
+                        </ul>
+                    </div>
+            </div>
+        </div>	
+    </div>
+        <!--// Footer Bottom Section \\-->
+    <div class="wm-footer-spot-section">
+        <div class="container">
+                    <div class="wm-footer-bottom-section">
+                        <div class="row">
+                                                        <div class="col-md-7">
+                                <div class="wm-newsletter-section">
+                                    <div class="wm-footer-widget-title"> <h2>Notre Newsletter</h2> </div>
+                                                                                                            <form id="newsletterForm" method="POST" action="/inscription-newsletter">
+                                        <input type="hidden" name="token" value="6C4u4wMPZ5CT5uslobJy87i7twztm9DBBob0_xnZugQ">
+                                        <input type="hidden" name="referrer" value="https://www.radio.fm/post/hit/hit">
+                                        <input type="hidden" id="front_newsletter_recaptcha" name="front_newsletter_recaptcha">
+                                        <input type="email" required="required" name="email" placeholder="Votre adresse email">
+                                        <input id="submit-newsletter" type="submit" value="S'enregistrer" class="wm-color wm-bordercolor">
+                                    </form>
+                                                                    </div>
+                            </div>
+                                                        <div class="col-md-5">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="wm-footer-social-media">
+                                    <ul class="wm-footer-icons even-items">
+                                                                                                                                                                <li class="wm-facebook">
+                                            <a href="https://www.facebook.com/radio" target="_blank"><i class="fa fa-facebook"></i> facebook</a>
+                                        </li>
+                                                                                                                        <li class="wm-instagram">
+                                            <a href="https://www.instagram.com/radio/" target="_blank"><i class="fa fa-instagram"></i> instagram</a>
+                                        </li>
+                                                                                                                                                            </ul>
+
+                                    <ul class="application-list">
+                                                                                    <li class="first">Nos applications</li>
+                                                                                                                            <li class="float-L">
+                                                <a href="." target="_blank">
+                                                    <i class="fa fa-android fa-3x"></i>
+                                                </a>
+                                            </li>
+                                                                                                                            <li class="float-L">
+                                                <a href="https://itunes.apple.com/tc/app/nrj-guyane/id933198445?mt=8" target="_blank">
+                                                    <i class="fa fa-apple fa-3x"></i>
+                                                </a>
+                                            </li>
+                                                                                <li class="last">
+                                            2022 radio Guyane
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 signature"><small class="pull-right">WinWeb v4.229
+, une solution web by labmedia &amp; WinMedia</small></div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    <!--// Footer Bottom Section \\-->
+
+</footer>
+
+
 
   <div id="snackbar">Some text some message..</div>
 
@@ -111,6 +302,10 @@
   <script src="/js/post.js"></script>
   <script src="/js/main.js"></script>
    <script src="/js/sendkeys.js"></script>
+        <script src="/js/hit_controller.js"></script>
+	     <script src="/js/welcome_controller.js"></script>
+	          <script src="/js/hello_controller.js"></script>
+
 
 
 

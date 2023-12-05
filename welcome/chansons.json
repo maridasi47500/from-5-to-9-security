@@ -1,0 +1,3 @@
+{"maduree": 1000000,"myvol":"40",
+"song": {"artist": "<%=my_params["artist"]%>", "title": "<%=my_params["title"]%>", "artist_prec": "rihanna", "title_prec": "diamonds", "artist_suiv": "sia", "title_suiv": "chandelier", "filename": "<%=my_params["filename"]%>"}
+}
