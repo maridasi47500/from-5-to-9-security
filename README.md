@@ -1,4 +1,19 @@
 # bienvenue dans hacker ethique
-- bien sur j veux me rappeler de se que je sais faire comme programmes :snake: :gem:
-- ecrire dans un fichier :file_folder: et dans une base de donneess 	meme si j'ai pas peur de tout oublier du jour au lendemain :skull:	
+- premiere radio
+- faire 
+```
+```
+- lancer:
+
+```
+```
+$ python3 connect4.py
+```
+et
+```
+$ sh mysite.sh
+```
+- visit http://localhost:8081
+
+
 

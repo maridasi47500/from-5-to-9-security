@@ -14,7 +14,7 @@ import sys
 
 class Route():
     def __init__(self):
-        self.Program=Directory("hacker ethique")
+        self.Program=Directory("premiere radio")
         self.Program.set_path("./")
         self.mysession={"notice":None,"email":None,"name":None}
         self.dbScript=Myscript()
