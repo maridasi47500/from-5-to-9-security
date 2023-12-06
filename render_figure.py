@@ -23,6 +23,12 @@ class RenderFigure():
         return self.session
     def set_param(self,x,y):
         self.params[x]=y
+    def getparams(self,param):
+        try:
+            x=self.params[param]
+        except:
+            x=None
+        return x
     def render_body(self):
         try:
           mystr=""
@@ -32,7 +38,7 @@ class RenderFigure():
                   continue
               k=j.split("%>")
               print("my session",self.session)
-              loc={"session": self.session,"render_collection": self.render_collection,"params": self.params}
+              loc={"session": self.session,"render_collection": self.render_collection,"params":self.params,"getparams": self.getparams}
               for n in self.params:
                   loc[n]=self.params[n]
 

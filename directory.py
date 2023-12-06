@@ -11,9 +11,10 @@ class Directory():
         self.path="./"
         self.html=""
         self.url=""
+        self.mesparams=["email","name","notice"]
         self.redirect=False
     def logout(self):
-        for x in ["email","name","notice"]:
+        for x in self.mesparams:
             try:
                 self.session[x]=""
             except:
@@ -25,7 +26,7 @@ class Directory():
     def get_session(self):
         return self.session
     def set_other_session(self,s):
-        for x in ["email","name","notice"]:
+        for x in self.mesparams:
             try:
                 self.session[x]=s[x]
             except:
@@ -33,7 +34,7 @@ class Directory():
                 self.session[x]=""
         self.session["mysession"]=False
     def set_my_session(self,s):
-        for x in ["email","name","notice"]:
+        for x in self.mesparams:
             try:
                 self.session[x]=s[x]
             except:
@@ -49,7 +50,7 @@ class Directory():
                 self.session[x]=""
         self.session["mysession"]=True
     def set_session(self,s):
-        for x in ["email","name","notice"]:
+        for x in self.mesparams:
             try:
                 self.session[x]=s[x]
             except:
@@ -97,7 +98,7 @@ class Directory():
         print("session : : ",mysession)
         if not mysession["mysession"]:
             self.session["notice"]=""
-        if (not mysession or (not mysession["email"] and not mysession["name"])) and self.url != "/" and not self.redirect:
+        if (not mysession or (not mysession["email"] and not mysession["name"])) and self.url != "/" and not self.redirect and self.url != "/signin":
             print("ok not loged in")
             redi="/"
             self.redirect=redi

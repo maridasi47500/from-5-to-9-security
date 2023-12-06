@@ -1,0 +1,76 @@
+<a href="/data_reach">a propos</a>
+<h2><%=user['nomcomplet']%></h2>
+<p><a href="/edituser/<%=user['id']%>">edit user</a></p>
+<p><form method="post" action="/deleteuser/<%=user['id']%>" onsubmit="return confirm('ê tes vous sûr-e de de vouloir supprimer <%=user['nomcomplet']%> ?');"> <input type="submit" name="submit" value="delete user"/></form></p>
+<table>
+<tr>
+<td rowspan="10"><img id="mypic" src=""/><br>
+my pic
+<%=user['mypic']%>
+<br>
+name
+<%=user['nomcomplet']%>
+
+</td>
+<td colspan="2">MEtier
+<%=user['metier']%>
+
+</td>
+</tr>
+<tr>
+<td colspan="2">gender
+<%=user['gender']%>
+
+
+</td>
+</tr>
+<tr>
+<td colspan="2">Business Address
+<%=user['businessaddress']%>
+
+</td>
+</tr>
+<tr>
+<td colspan="2">Email
+<%=user['email']%>
+
+</td>
+</tr>
+<tr>
+<td rowspan="4">personal profile
+	<%=user['profile']%>
+
+</td>
+</tr>
+<tr>
+<tr>
+<td colspan="2">Other Contact Information
+<table>
+<tr>
+<td>
+ZipCode : 
+<%=user['zipcode']%>
+</td>
+</tr>
+
+<tr>
+<td>
+PostalAddress : 
+<%=user["postaladdress"]%>
+</td>
+</tr>
+<tr>
+<td>
+email : 
+<%=user["otheremail"]%>
+</td>
+</tr>
+<table>
+
+</td>
+</tr>
+</tr>
+
+<tr>
+</tr>
+</table>

@@ -22,6 +22,7 @@
 			    <link href="/css/application.css" rel="stylesheet" />
 			        <link href="/css/recordings.css" rel="stylesheet" />
 				    <link href="/css/xmas.css" rel="stylesheet" />
+				    <link href="/css/myconcert.css" rel="stylesheet" />
 
    
 
@@ -107,6 +108,12 @@
     </button>
     <a class="navbar-brand iuyghkuygh" href="/"></a>
     <div class="collapse navbar-collapse azertyu" id="navbarSupportedContent">
+	    <div class="d-flex">
+		            <%="<form action=\"/logmeout\" method=\"post\"><input value=\"se deconnecter\" type=\"submit\"/></form>" if session['name'] != "" else ""%>
+
+			            <%="bienvenue "+session['name'] if session['name'] != "" else ""%>
+
+	    </div>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Recherche">
         <button class="btn btn-outline-success" type="submit">Rechercher</button>
@@ -129,6 +136,7 @@
   </div>
 </nav>
 <main class="mycontent">
+	<p id="notice"><%=session["notice"]%></p>
     {plusdemot}
 </main>
  <div id="overlayspinner">  <div id="textspinner">LE SITE DE radio est train de charger</div></div>
@@ -147,6 +155,8 @@
     <label for="menu2">RADIO <span>+</span></label>
     <input id="menu2" type="checkbox" name="menu" onchange="$('[for='+this.id+'] span').html(this.checked ? '-' : '+');" />
     <ul class="sub">
+      <li><a href="/signin">sign in</a></li>
+      <li><a href="/users">voir tous les utilisateurs</a></li>
     </ul>
   </li>
   <li class="has-sub">
@@ -156,6 +166,8 @@
       <li>La playlist radio</li>
       <li><a href="/xmas">xmas</a></li>
       <li><a href="/chat">chat</a></li>
+      <li><a href="/recordsomething">enregistrer quelque chose</a></li>
+
     </ul>
   </li>
 
@@ -304,7 +316,11 @@ My AD!!    </div>
    <script src="/js/sendkeys.js"></script>
         <script src="/js/hit_controller.js"></script>
 	     <script src="/js/welcome_controller.js"></script>
+	          <script src="/js/myconcert.js"></script>
 	          <script src="/js/hello_controller.js"></script>
+	          <script src="/js/audiodisplay.js"></script>
+	          <script src="/js/recorderjs/recorder.js"></script>
+		            <%="<script src=\"/js/mainrecording.js\"></script>" if getparams('enregistrer') else ""%>
 
 
 

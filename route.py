@@ -3,6 +3,7 @@ from render_figure import RenderFigure
 from myscript import Myscript
 from mycommandline import Mycommandline
 from scriptpython import Scriptpython
+from user import User
 
 
 from song import Song
@@ -15,6 +16,7 @@ import sys
 
 class Route():
     def __init__(self):
+        self.dbUsers=User()
         self.Program=Directory("premiere radio")
         self.Program.set_path("./")
         self.mysession={"notice":None,"email":None,"name":None}
@@ -81,6 +83,10 @@ class Route():
         hi=self.dbScript.create(myparam)
         print(hey,hi)
         return self.render_some_json("welcome/monscript.json")
+    def enregistrer(self,search):
+        print("hello action")
+        self.render_figure.set_param("enregistrer",True)
+        return self.render_figure.render_figure("welcome/radio.html")
     def hello(self,search):
         print("hello action")
         return self.render_figure.render_figure("welcome/index.html")
@@ -103,6 +109,55 @@ class Route():
         self.render_figure.set_param("title", song["title"])
         self.figure.set_param("artist", song["artist"])
         self.render_some_json(Fichier("./welcome","chansons.json").lire())
+    def delete_user(self,params={}):
+        getparams=("id",)
+        myparam=self.post_data(self.getparams)
+        self.render_figure.set_param("user",User().deletebyid(myparam["id"]))
+        self.set_redirect("/")
+        return self.render_figure.render_redirect()
+    def edit_user(self,params={}):
+        getparams=("id",)
+        myparam=self.get_this_route_param(getparams,params)
+        print("route params")
+        self.render_figure.set_param("user",User().getbyid(myparam["id"]))
+        return self.render_figure.render_figure("user/edituser.html")
+    def seeuser(self,params={}):
+        getparams=("id",)
+        print("get param, action see my new",getparams)
+        myparam=self.get_this_route_param(getparams,params)
+        return self.render_figure.set_param("user",User().getbyid(myparam["id"]))
+    def myusers(self,params={}):
+        self.render_figure.set_param("users",User().getall())
+        return self.render_figure.render_figure("user/users.html")
+    def update_user(self,params={}):
+        myparam=self.post_data(self.getparams)
+        self.user=self.dbUsers.update(params)
+        self.set_session(self.user)
+        self.set_redirect(("/seeuser/"+params["id"][0]))
+    def login(self,s):
+        search=self.get_post_data()(params=("email","password"))
+        self.user=self.dbUsers.getbyemailpw(search["email"],search["password"])
+        print("user trouve", self.user)
+        if self.user["email"]:
+            self.set_session(self.user)
+            self.set_session(self.user)
+            self.set_json("{\"redirect\":\"/chat\"}")
+        else:
+            self.set_json("{\"redirect\":\"/signin\"}")
+            print("session login",self.Program.get_session())
+        return self.render_figure.render_json()
+    def signin(self,search):
+        return self.render_figure.render_figure("user/signin.html")
+    def save_user(self,params={}):
+        myparam=self.get_post_data()(params=("businessaddress","gender","profile","metier", "otheremail", "password","zipcode", "email", "mypic","postaladdress","nomcomplet","password_confirmation"))
+        self.user=self.dbUsers.create(myparam)
+        if self.user["email"]:
+            self.set_session(self.user)
+            self.set_json("{\"redirect\":\"/welcome\"}")
+            return self.render_figure.render_json()
+        else:
+            self.set_json("{\"redirect\":\"/e\"}")
+            return self.render_figure.render_json()
     def run(self,redirect=False,redirect_path=False,path=False,session=False,params={},url=False,post_data=False):
         if post_data:
             print("post data")
@@ -119,7 +174,13 @@ class Route():
             self.redirect_path=redirect
         if not self.render_figure.partie_de_mes_mots(balise="section",text=self.Program.get_title()):
             self.render_figure.ajouter_a_mes_mots(balise="section",text=self.Program.get_title())
-        if path and path.endswith("jpg"):
+        if path and path.endswith("png"):
+            self.Program=Pic(path)
+            self.Program.set_path("./")
+        elif path and path.endswith("svg"):
+            self.Program=Pic(path)
+            self.Program.set_path("./")
+        elif path and path.endswith("jpg"):
             self.Program=Pic(path)
             self.Program.set_path("./")
         elif path and path.endswith(".jfif"):
@@ -138,12 +199,23 @@ class Route():
                     '^/allscript$': self.allscript,
                     '^/welcome$': self.welcome,
                     '^/chat$': self.chat,
+                    '^/signin$': self.signin,
+                    '^/recordsomething$': self.enregistrer,
                     r"^/songs/jouerunechanson$":self.jouerchanson,
                     r"^/songs/playmusique1$":self.jouerchanson,
                     r"^/songs/playmusique$":self.jouerchanson,
+                    '^/logmeout$':self.logout,
+                                        '^/save_user$':self.save_user,
+                                                            '^/update_user$':self.update_user,
                     r"^/songs/musique$":self.jouerchanson,
                     r"^/passage$":self.passage,
                     '^/monscript$': self.monscript,
+                    "^/seeuser/([0-9]+)$":self.seeuser,
+                                        "^/edituser/([0-9]+)$":self.edit_user,
+                                                            "^/deleteuser/([0-9]+)$":self.delete_user,
+                                                                                '^/login$':self.login,
+
+                                                                                                    '^/users$':self.myusers,
                     '^/$': self.hello
 
                     }
@@ -161,6 +233,7 @@ class Route():
 
                    except Exception:  
                        self.Program.set_html(html="<p>une erreur s'est produite "+str(traceback.format_exc())+"</p><a href=\"/\">retour à l'accueil</a>")
+                   self.Program.redirect_if_not_logged_in()
                    return self.Program
                else:
                    self.Program.set_html(html="<p>la page n'a pas été trouvée</p><a href=\"/\">retour à l'accueil</a>")

@@ -1,0 +1,11 @@
+<div class="card">
+	<a href="/seeuser/<%=user["id"]%>">
+	<img class="mypic" src="/uploads/<%=user['mypic']%>"/>
+<div class="card-text">
+<p><%=user['nomcomplet']%></p>
+
+</div>
+	</a>
+<p><a href="/edituser/<%=user['id']%>">edit user</a></p>
+<p><form method="post" action="/deleteuser/<%=user['id']%>" onsubmit="return confirm('êtes vous sûr-e de de vouloir supprimer <%=user['nomcomplet']%> ?');"> <input type="submit" name="submit" value="delete user"/></form></p>
+</div>
