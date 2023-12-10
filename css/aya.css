@@ -37,3 +37,12 @@ border-radius:777777px;
   background-repeat: no-repeat; 
   cursor: pointer;
 }
+#text{
+  background: url('/uploads/wood.png');
+  background-repeat: repeat; 
+}
+.mycontent{
+  background-position: center; 
+  background: url('/uploads/mer.png');
+  background-repeat: repeat; 
+}
