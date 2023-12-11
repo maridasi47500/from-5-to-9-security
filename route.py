@@ -65,7 +65,7 @@ class Route():
     def welcome(self,search):
         hi=self.dbScript.getall()
         self.render_figure.set_param("scripts",hi)
-        return self.render_figure.render_figure("welcome/allscript.html")
+        return self.render_figure.render_figure("welcome/index.html")
     def allscript(self,search):
         #myparam=self.get_post_data()(params=("name","content",))
         hi=self.dbScript.getall()

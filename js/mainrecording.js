@@ -49,13 +49,15 @@ function gotBuffers( buffers ) {
 function doneEncoding( blob ) {
     Recorder.setupDownload( blob, "myRecording" + ((recIndex<10)?"0":"") + recIndex + ".wav" );
     if (!($("#playit")[0])){
-      $("#controls").append("<audio id=\"playit\" src=\"\" controls></audio>");
+      $("#controls").append("<a id=\"playit\" href=\"javascript:void(0)\" onclick=\"window.audio1.load()\">écouter l'enregistrement</a>");
     }
     document.getElementById("playit").src=document.getElementById("save").href;
     recIndex++;
     var url=URL.createObjectURL(blob);
+    window.audio1.src=url;
+    
     var recordingblog=null;
-    var formData=new FormData($("#myform")[0]);
+    var formData=new FormData();
     var recording=new Blob([blob]);
     formData.append("recording",recording);
     formData.append("myid",$("#myid").html());

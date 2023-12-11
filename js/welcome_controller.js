@@ -53,121 +53,81 @@ function init() {
         var minduration=0;
 	var posSlider = document.getElementById("myRange");
 	var volSlider = document.getElementById("myVol");
-	var audio1=new Audio();
+	window.audio1=new Audio();
 	$(posSlider).on('input',function (e) {
             e.preventDefault();
-		audio1.currentTime = posSlider.value;
+		window.audio1.currentTime = posSlider.value;
+
+
 	});
 	$(posSlider).on('change',function (e) {
 
             e.preventDefault();
-		audio1.currentTime = posSlider.value;
+		posSlider.value = window.audio1.currentTime;
+
+
 	});
-        /*$.ajax({url:"/songs/jouerunechanson",success:function(data){
-        audio1=new Audio('/uploads/'+data.song.filename);*/
 
 	var goBut = document.getElementById("goButton");
 	var playPic = "/img/play.png";
 	var pausePic = "/img/pause.png";
         var paspremier=false;
-	var mydata;
-                    audio1.src="/uploads/shakira-acrostico.mp3";
-               if (audio1 && !audio1.paused){
-                    audio1.pause();
+                    window.audio1.src="/uploads/shakira-acrostico.mp3";
+               if (window.audio1 && !window.audio1.paused){
+                    window.audio1.pause();
                }
-                    audio1.play();
+                    window.audio1.play();
 			goBut.src = pausePic;
        
-	$(goBut).click(function (e) {
-            e.preventDefault();
-		if (!audio1 || audio1.paused) {
-                     $.ajax({type:"get",url:"/songs/playmusique",data:{play:1},
-        success:function(data){
-console.log(data);
-        }
-        });
-			
-                        $.ajax({url:"/songs/jouerunechanson",success:function(data){
-//console.log(JSON.stringify(data)+"azertyui"+(data.song));
-                            minduration=audio1.duration;
-                            mydata=data;
-                            if(data.song){
-var xxxxx=randomString(10);
-                    $.ajax({url:"/somecss",data:{myid: xxxxx},success:function(data){
-console.log("heure de passage ")
-$('head').append("<style>"+data+"</style>");
-$('body').append("<div class=\"noel\" id=\""+xxxxx+"\"></div>");
-$("#"+xxxxx).addClass("xmas");
-                        }});
-                    audio1.src=('/uploads/'+data.song.filename);
-
                     if (!paspremier){
-                    audio1.addEventListener('loadedmetadata',setMax);
+                    window.audio1.addEventListener('loadedmetadata',setMax);
 
-                    $.ajax({url:"/passage",data:{title: audio1.src},success:function(data){
-console.log("heure de passage ")
-                        }});
 
         function setMax() {
             //e.preventDefault();
-            console.log(Number(audio1.duration));
-		posSlider.max= audio1.duration; posSlider.setAttribute('min', 0);
+            console.log(Number(window.audio1.duration));
+		posSlider.max= window.audio1.duration; posSlider.setAttribute('min', 0);
                 //console.log(minduration);
-                audio1.currentTime = 0;
-                audio1.play();
-                $(".precedent").html("<h6>précédente</h6><span>"+(mydata.song.artist_prec|| "")+"</span><span>"+(mydata.song.title_prec|| "")+"</span>");
-                $(".encours").html("<h6>Maintenant</h6><span>"+(mydata.song.artist|| "")+"</span><span>"+(mydata.song.title|| "")+"</span>");
-                $(".avenir").html("<h6>Suivante</h6><span>"+(mydata.song.artist_suiv|| "")+"</span><span>"+(mydata.song.title_suiv|| "")+"</span>");
+                window.audio1.currentTime = 0;
+                   if (!window.audio1.paused){
+                    window.audio1.pause();
+                   }
+
+                window.audio1.play();
                 //posSlider.value = minduration;
 	};
-                audio1.addEventListener("timeupdate", voirmusique);
+                window.audio1.addEventListener("timeupdate", voirmusique);
 	function voirmusique() {
-            console.log("tyui CURRENTIME",audio1.currentTime);
+            console.log("tyui CURRENTIME",window.audio1.currentTime);
 		//posSlider.value = 0;
-		posSlider.value = audio1.currentTime;
-		if (audio1.ended || audio1.max === audio1.duration) {
-                    $.ajax({url:"/songs/jouerunechanson",success:function(data){
-//console.log(JSON.stringify(data))
-                                    minduration=audio1.duration;
-                                    mydata=data;
-                                    if(data.song){
-                            audio1.src='/uploads/'+data.song.filename;
-                                    }else{
-
-
-			audio1.pause();
-                            audio1=new Audio();
-			goBut.src = playPic;
-                                    }
-                        }});
+		posSlider.value = window.audio1.currentTime;
+		if (window.audio1.ended || window.audio1.max === window.audio1.duration) {
 			posSlider.value = 0;
-			audio1.currentTime = 0;
-			//goBut.src = playPic;
-			//audio1.pause();
+			window.audio1.currentTime = 0;
 		}
 	};
         paspremier=true;
         }
-                    audio1.play();
+	$(goBut).click(function (e) {
+            e.preventDefault();
+		if (!window.audio1 || window.audio1.paused) {
+			
+                            minduration=window.audio1.duration;
+
+
+                   if (!window.audio1.paused){
+                    window.audio1.pause();
+                   }
+                    window.audio1.play();
 			goBut.src = pausePic;
                             }else{
                        //console.log("none");
-                    audio1.pause();
-                    audio1=new Audio();
+                    window.audio1.pause();
+                    //window.audio1=new Audio();
+			goBut.src = playPic;
                             }
-                }});
             
                         
-		} else {
-			audio1.pause();
-			audio1=new Audio();
-			goBut.src = playPic;
-                          $.ajax({type:"get",url:"/songs/playmusique",data:{play:0},
-        success:function(data){
-console.log(data);
-        }
-        });
-		}
 	});
 
 
@@ -175,7 +135,7 @@ console.log(data);
 
 	$(volSlider).on('input',function (e) {
             e.preventDefault();
-		audio1.volume = volSlider.value / 100;
+		window.audio1.volume = volSlider.value / 100;
                 $.ajax({type:"get",url:"/songs/playmusique1",data:{myvol: $("#myVol").val()},
         success:function(data){
 console.log(data);
@@ -189,11 +149,10 @@ console.log(data);
                 //console.log(data.myvol)
                 $(goBut).click();
                 $("#myVol")[0].value=(parseInt(data.myvol));
-                audio1.volume = volSlider.value / 100;
+                window.audio1.volume = volSlider.value / 100;
             }
         }
         });
-            /*}});*/
 };
 
 init();
