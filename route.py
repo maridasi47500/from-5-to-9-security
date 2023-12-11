@@ -1,9 +1,8 @@
 from directory import Directory
 from render_figure import RenderFigure
 from myscript import Myscript
-from mycommandline import Mycommandline
-from scriptpython import Scriptpython
 from user import User
+from myrecording import Myrecording
 
 
 from song import Song
@@ -21,8 +20,7 @@ class Route():
         self.Program.set_path("./")
         self.mysession={"notice":None,"email":None,"name":None}
         self.dbScript=Myscript()
-        self.scriptpython=Scriptpython
-        self.dbCommandline=Mycommandline()
+        self.dbRecording=Myrecording()
         self.render_figure=RenderFigure(self.Program)
         self.getparams=("id",)
     def set_post_data(self,x):
@@ -66,6 +64,10 @@ class Route():
         hi=self.dbScript.getall()
         self.render_figure.set_param("scripts",hi)
         return self.render_figure.render_figure("welcome/index.html")
+    def audio_save(self,search):
+        myparam=self.get_post_data()(params=("recording",))
+        hi=self.dbRecording.create(myparam)
+        return self.render_some_json("welcome/hey.json")
     def allscript(self,search):
         #myparam=self.get_post_data()(params=("name","content",))
         hi=self.dbScript.getall()
@@ -200,6 +202,7 @@ class Route():
                     '^/welcome$': self.welcome,
                     '^/chat$': self.chat,
                     '^/signin$': self.signin,
+                    '^/audio_save$': self.audio_save,
                     '^/recordsomething$': self.enregistrer,
                     r"^/songs/jouerunechanson$":self.jouerchanson,
                     r"^/songs/playmusique1$":self.jouerchanson,
