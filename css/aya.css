@@ -46,3 +46,6 @@ border-radius:777777px;
   background: url('/uploads/mer.png');
   background-repeat: repeat; 
 }
+.picjeu{
+	max-width:250px;
+}

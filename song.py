@@ -34,9 +34,7 @@ class Song(Model):
         return None
     def getbyartistid(self,myid):
         self.cur.execute("select * from song where artist_id = ?",(myid,))
-        row=dict(self.cur.fetchone())
-        print(row["id"], "row id")
-        job=self.cur.fetchall()
+        row=self.cur.fetchall()
         return row
     def getbyid(self,myid):
         self.cur.execute("select * from song where id = ?",(myid,))

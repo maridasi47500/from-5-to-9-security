@@ -26,6 +26,10 @@ class Lyric(Model):
         job=self.cur.fetchall()
         self.con.commit()
         return None
+    def getbysongid(self,myid):
+        self.cur.execute("select * from lyric where song_id = ?",(myid,))
+        row=self.cur.fetchall()
+        return row
     def getbyid(self,myid):
         self.cur.execute("select * from lyric where id = ?",(myid,))
         row=dict(self.cur.fetchone())

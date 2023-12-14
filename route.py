@@ -6,7 +6,9 @@ from myrecording import Myrecording
 from gagnant import Gagnant
 from song import Song
 from cado import Cado
+from lyric import Lyric
 from artist import Artist
+from jeu import Jeu
 
 
 from song import Song
@@ -26,7 +28,9 @@ class Route():
         self.dbScript=Myscript()
         self.dbRecording=Myrecording()
         self.dbSong=Song()
+        self.dbJeu=Jeu()
         self.dbArtist=Artist()
+        self.dbLyric=Lyric()
         self.dbGagnant=Gagnant()
         self.dbCado=Cado()
         self.render_figure=RenderFigure(self.Program)
@@ -173,11 +177,36 @@ class Route():
 
         hey=self.dbSong.create(myparam)
         return self.render_some_json("welcome/create.json")
+    def getlyrics(self,params={}):
+        getparams=("id",)
+
+       
+        myparam=self.get_this_get_param(getparams,params)
+        print("my param :",myparam)
+        try:
+          hey=self.dbLyric.getbysongid(myparam["id"])
+          print("hey",hey)
+          if not hey:
+            hey=[]
+        except:
+          hey=[]
+
+        self.render_figure.set_param("lyrics",hey)
+        return self.render_some_json("welcome/lyrics.json")
     def getsongs(self,params={}):
         getparams=("id",)
 
+       
         myparam=self.get_this_get_param(getparams,params)
-        hey=self.dbSong.getbyartistid(myparam["id"])
+        print("my param :",myparam)
+        try:
+          hey=self.dbSong.getbyartistid(myparam["id"])
+          print("hey",hey)
+          if not hey:
+            hey=[]
+        except:
+          hey=[]
+
         self.render_figure.set_param("songs",hey)
         return self.render_some_json("welcome/songs.json")
     def photoartist(self,params={}):
@@ -188,6 +217,15 @@ class Route():
         myparam=self.get_post_data()(params=("pic","name"))
         hey=self.dbCado.create(myparam)
         return self.render_some_json("welcome/create.json")
+    def jouerjeux(self,search):
+        return self.render_figure.render_figure("welcome/jeu.html")
+    def monjeu(self,search):
+        myparam=self.get_post_data()(params=("lyric_id",))
+
+        hi=self.dbJeu.createwithlyric(myparam)
+        print(hi)
+        self.render_figure.set_param("redirect","/jouerjeux")
+        return self.render_some_json("welcome/redirect.json")
     def gagnant(self,search):
         myparam=self.get_post_data()(params=("name","pic",))
 
@@ -226,6 +264,9 @@ class Route():
         if path and path.endswith("png"):
             self.Program=Pic(path)
             self.Program.set_path("./")
+        elif path and path.endswith("gif"):
+            self.Program=Pic(path)
+            self.Program.set_path("./")
         elif path and path.endswith("svg"):
             self.Program=Pic(path)
             self.Program.set_path("./")
@@ -242,7 +283,10 @@ class Route():
             path=path.split("?")[0]
             print("link route ",path)
             ROUTES={
+                    '^/creejeu$': self.monjeu,
+                    '^/jouerjeux$': self.jouerjeux,
                     '^/getsongs$': self.getsongs,
+                    '^/getlyrics$': self.getlyrics,
                     '^/photoartist$': self.photoartist,
                     '^/new$': self.nouveau,
                     '^/gagnant$': self.gagnant,

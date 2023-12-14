@@ -1,0 +1,19 @@
+  <div class="col">
+	      <div class="card h-100">
+			          <div class="card-body">
+					  <img src="/uploads/<%=jeu["pic"]%>" class="picjeu card-img-top" alt="artist pic <%=jeu["artistname"]%>">
+							        </div>
+								<h5>quelle est cette chanson ?</h5>
+								<p class="card-text">
+								<form action="/joueraujeu" id="joueraujeu">
+									<input type="hidden" value="<%=jeu["id"]%>"/>
+									<div class="field">
+										<select name="song_id" id="choisischanson">
+											<option>choisis une chanson</option>
+											<%=render_collection(collection=dbSong.getall(), partial='welcome/_somesong.html', as_='song')%>
+										</select>
+									</div>
+								</form>
+								</p>
+								    </div>
+								      </div>

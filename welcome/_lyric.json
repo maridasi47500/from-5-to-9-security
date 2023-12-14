@@ -1,0 +1,2 @@
+<%="," if paspremier else ""%>{"id":"<%=lyric["id"]%>","text": "<%=lyric["text"].rstrip ()%>"
+}

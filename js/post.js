@@ -5,6 +5,7 @@ $('span.myscript').on('click', function () {
     alert('max upload size is 5k');
 return false;
   }
+
   $.ajax({
     // Your server script to process the upload
     url: "/lancerscript",
@@ -100,15 +101,45 @@ return false;
 			data:{"id":$(this).val()},
 			type:"get",
 			success:function(data){
-				var field=$("#jeuselect");
-				field.html("<option></option>");
+				var field=$("#jeusong");
+				field.html("<option>choisir une chanson</option>");
 				var songs=data.songs,song;
 				for (var i=0;i<songs.length;i++){
 					song=songs[i];
-					field.append(`<option value="${song.id}">${song.title}</option>`);
+					field.append("<option value=\""+song.id+"\">"+song.title+"</option>");
 				}
 			}
 		});
 	});
+	$("#jeusong").change(function(){
+		$.ajax({
+			url:"/getlyrics",
+			data:{"id":$(this).val()},
+			type:"get",
+			success:function(data){
+				var field=$("#jeulyric");
+				field.html("<option>choisir des paroles</option>");
+				var songs=data.lyrics,song;
+				for (var i=0;i<songs.length;i++){
+					song=songs[i];
+					field.append("<option value=\""+song.id+"\">"+song.text+"</option>");
+				}
+			}
+		});
+	});
+	$("#choisischanson").change(function(){
+		$.ajax({
+			url:"/joueraujeu",
+			data:{"id":$(this).val()},
+			type:"get",
+			success:function(data){
+				var x= data.redirect;
+				if (x){
+					window.location=x;
+				}
+			}
+		});
+	});
+
   
 });

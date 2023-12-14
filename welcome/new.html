@@ -53,10 +53,11 @@
 	<%=render_collection(collection=dbArtist.getwithoutpic(), partial='welcome/_artist.html', as_='artist')%>
 </div>
 <h1 id="jeu">jeu</h1>
-<form action="/creer">
+<form action="/creejeu">
 	<div class="field">
 <label for="jeuartist">artist</label>
 		<select id="jeuartist" name="artist_id">
+			<option>choisis un artiste</option>
 	<%=render_collection(collection=dbArtist.getwithpic(), partial='welcome/_someartist.html', as_='artist')%>
 		</select>
 	</div>
@@ -64,5 +65,13 @@
 <label for="jeusong">song</label>
 		<select id="jeusong" name="song_id">
 		</select>
+	</div>
+	<div class="field">
+<label for="jeulyric">song</label>
+		<select id="jeulyric" name="lyric_id">
+		</select>
+	</div>
+	<div class="actions">
+		<input type="submit" value="ok" name="ok"/>
 	</div>
 </form>

@@ -1,0 +1,3 @@
+{"lyrics": [
+<%=render_collection(collection=params["lyrics"], partial='welcome/_lyric.json', as_='lyric')%>
+]}
