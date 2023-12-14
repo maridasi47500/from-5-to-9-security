@@ -3,6 +3,9 @@ from render_figure import RenderFigure
 from myscript import Myscript
 from user import User
 from myrecording import Myrecording
+from gagnant import Gagnant
+from song import Song
+from cado import Cado
 
 
 from song import Song
@@ -21,6 +24,9 @@ class Route():
         self.mysession={"notice":None,"email":None,"name":None}
         self.dbScript=Myscript()
         self.dbRecording=Myrecording()
+        self.dbSong=Song()
+        self.dbGagnant=Gagnant()
+        self.dbCado=Cado()
         self.render_figure=RenderFigure(self.Program)
         self.getparams=("id",)
     def set_post_data(self,x):
@@ -79,6 +85,7 @@ class Route():
         print(hi, "my script")
         a=self.scriptpython(hi["name"]).lancer()
         return self.render_some_json("welcome/monscript.json")
+
     def monscript(self,search):
         myparam=self.get_post_data()(params=("name","content",))
         hey=self.dbCommandline.create(myparam)
@@ -148,6 +155,25 @@ class Route():
             self.set_json("{\"redirect\":\"/signin\"}")
             print("session login",self.Program.get_session())
         return self.render_figure.render_json()
+    def nouveau(self,search):
+        return self.render_figure.render_figure("welcome/new.html")
+    def chanson(self,params={}):
+        myparam=self.get_post_data()(params=("title","artist","file","lyric"))
+
+
+        hey=self.dbCado.create(myparam)
+        return self.render_some_json("welcome/create.json")
+    def cadeau(self,params={}):
+        myparam=self.get_post_data()(params=("pic","name"))
+        hey=self.dbCado.create(myparam)
+        return self.render_some_json("welcome/create.json")
+    def gagnant(self,search):
+        myparam=self.get_post_data()(params=("name","pic",))
+
+        hi=self.dbGagnant.create(myparam)
+        print(hey,hi)
+        return self.render_some_json("welcome/create.json")
+
     def signin(self,search):
         return self.render_figure.render_figure("user/signin.html")
     def save_user(self,params={}):
@@ -197,6 +223,10 @@ class Route():
             ROUTES={
 
 
+                    '^/new$': self.nouveau,
+                    '^/gagnant$': self.gagnant,
+                    '^/chanson$': self.chanson,
+                    '^/cadeau$': self.cadeau,
                     '^/lancerscript$': self.lancerscript,
                     '^/allscript$': self.allscript,
                     '^/welcome$': self.welcome,

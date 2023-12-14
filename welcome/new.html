@@ -17,12 +17,22 @@
 	</div>
 </form>
 <h1 id="chanson">chanson</h1>
-<form action="/gagnant">
+<form action="/chanson">
 	<div class="field">
-		<input type="file" name="file"/>
+<label for="artist">artist</label>
+		<input id="artist" type="text" name="artist"/>
 	</div>
 	<div class="field">
-		<input type="file" name="lyric"/>
+<label for="title">title</label>
+		<input id="title" type="text" name="title"/>
+	</div>
+	<div class="field">
+<label for="music">fichier de musique</label>
+		<input id="music" type="file" name="file"/>
+	</div>
+	<div class="field">
+<label for="lyric">fichier des parole</label>
+		<input id="lyric" type="file" name="lyric"/>
 	</div>
 	<div class="actions">
 		<input type="submit" name="ok"/>

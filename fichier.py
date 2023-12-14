@@ -6,6 +6,9 @@ class Fichier:
     print(self.path+"/"+self.name)
     j=open(self.path+"/"+self.name, "r")
     return j.read()
+  def ligneparligne(self):
+    j=open(self.path+"/"+self.name, "r")
+    return j.readlines()
   def lirefichier(self):
     print(self.path+"/"+self.name)
     j=open(self.path+"/"+self.name, "rb")
