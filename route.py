@@ -6,6 +6,7 @@ from myrecording import Myrecording
 from gagnant import Gagnant
 from song import Song
 from cado import Cado
+from artist import Artist
 
 
 from song import Song
@@ -25,6 +26,7 @@ class Route():
         self.dbScript=Myscript()
         self.dbRecording=Myrecording()
         self.dbSong=Song()
+        self.dbArtist=Artist()
         self.dbGagnant=Gagnant()
         self.dbCado=Cado()
         self.render_figure=RenderFigure(self.Program)
@@ -54,6 +56,13 @@ class Route():
           print("set session",x)
           self.Program.set_session(x)
           self.render_figure.set_session(self.Program.get_session())
+    def get_this_get_param(self,x,params):
+          print("set session",x)
+          hey={}
+          for a in x:
+              hey[a]=params[a][0]
+          return hey
+          
     def get_this_route_param(self,x,params):
           print("set session",x)
           return dict(zip(x,params["routeparams"]))
@@ -126,6 +135,7 @@ class Route():
         return self.render_figure.render_redirect()
     def edit_user(self,params={}):
         getparams=("id",)
+
         myparam=self.get_this_route_param(getparams,params)
         print("route params")
         self.render_figure.set_param("user",User().getbyid(myparam["id"]))
@@ -161,7 +171,18 @@ class Route():
         myparam=self.get_post_data()(params=("title","artist","file","lyric"))
 
 
-        hey=self.dbCado.create(myparam)
+        hey=self.dbSong.create(myparam)
+        return self.render_some_json("welcome/create.json")
+    def getsongs(self,params={}):
+        getparams=("id",)
+
+        myparam=self.get_this_get_param(getparams,params)
+        hey=self.dbSong.getbyartistid(myparam["id"])
+        self.render_figure.set_param("songs",hey)
+        return self.render_some_json("welcome/songs.json")
+    def photoartist(self,params={}):
+        myparam=self.get_post_data()(params=("pic","id",))
+        hey=self.dbArtist.update(myparam)
         return self.render_some_json("welcome/create.json")
     def cadeau(self,params={}):
         myparam=self.get_post_data()(params=("pic","name"))
@@ -171,7 +192,7 @@ class Route():
         myparam=self.get_post_data()(params=("name","pic",))
 
         hi=self.dbGagnant.create(myparam)
-        print(hey,hi)
+        print(hi)
         return self.render_some_json("welcome/create.json")
 
     def signin(self,search):
@@ -221,8 +242,8 @@ class Route():
             path=path.split("?")[0]
             print("link route ",path)
             ROUTES={
-
-
+                    '^/getsongs$': self.getsongs,
+                    '^/photoartist$': self.photoartist,
                     '^/new$': self.nouveau,
                     '^/gagnant$': self.gagnant,
                     '^/chanson$': self.chanson,

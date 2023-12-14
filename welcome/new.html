@@ -1,7 +1,12 @@
 <h1 id="cado">cados</h1>
-<form action="/cado">
+<form action="/cadeau">
 	<div class="field">
-		<input type="file" name="file"/>
+<label for="nomcado">nom cadeau</label>
+		<input id="nomcado" type="text" name="name"/>
+	</div>
+	<div class="field">
+<label for="piccado">image cadeau</label>
+		<input id="piccado" type="file" name="pic"/>
 	</div>
 	<div class="actions">
 		<input type="submit" name="ok"/>
@@ -10,7 +15,12 @@
 <h1 id="gagnant">gagnant</h1>
 <form action="/gagnant">
 	<div class="field">
-		<input type="file" name="file"/>
+<label for="nomgagnant">nom gagnant</label>
+		<input id="nomgagnant" type="text" name="name"/>
+	</div>
+	<div class="field">
+<label for="filegagnant">image gagnant</label>
+		<input id="filegagnant" type="file" name="pic"/>
 	</div>
 	<div class="actions">
 		<input type="submit" name="ok"/>
@@ -36,5 +46,23 @@
 	</div>
 	<div class="actions">
 		<input type="submit" name="ok"/>
+	</div>
+</form>
+<h1 id="artist">artist</h1>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+	<%=render_collection(collection=dbArtist.getwithoutpic(), partial='welcome/_artist.html', as_='artist')%>
+</div>
+<h1 id="jeu">jeu</h1>
+<form action="/creer">
+	<div class="field">
+<label for="jeuartist">artist</label>
+		<select id="jeuartist" name="artist_id">
+	<%=render_collection(collection=dbArtist.getwithpic(), partial='welcome/_someartist.html', as_='artist')%>
+		</select>
+	</div>
+	<div class="field">
+<label for="jeusong">song</label>
+		<select id="jeusong" name="song_id">
+		</select>
 	</div>
 </form>

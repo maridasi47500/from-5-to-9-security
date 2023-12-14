@@ -94,5 +94,21 @@ return false;
   });
 	return false;
   });
+	$("#jeuartist").change(function(){
+		$.ajax({
+			url:"/getsongs",
+			data:{"id":$(this).val()},
+			type:"get",
+			success:function(data){
+				var field=$("#jeuselect");
+				field.html("<option></option>");
+				var songs=data.songs,song;
+				for (var i=0;i<songs.length;i++){
+					song=songs[i];
+					field.append(`<option value="${song.id}">${song.title}</option>`);
+				}
+			}
+		});
+	});
   
 });

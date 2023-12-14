@@ -17,6 +17,7 @@ from urllib.parse import parse_qs, urlparse
 import re
 import requests
 req = requests.Session()
+req.cookies.clear()
 req.cookies["email"]=""
 req.cookies["name"]=""
 req.cookies["notice"]=""

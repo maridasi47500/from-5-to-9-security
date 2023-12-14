@@ -1,0 +1,3 @@
+{"songs":[
+	<%=render_collection(collection=params["songs"], partial='welcome/_songs.json', as_='song')%>
+]}
