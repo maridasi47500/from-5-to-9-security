@@ -51,10 +51,8 @@ class RenderFigure():
               loc={"session": self.session,"render_collection": self.render_collection,"params":self.params,"getparams": self.getparams,"dbCado":self.dbCado, "dbGagnant":self.dbGagnant,"dbSong":self.dbSong,"dbArtist":self.dbArtist,"dbJeu":self.dbJeu}
               for n in self.params:
                   loc[n]=self.params[n]
-
               print(k[0])
               l=exec("myvalue="+k[0], globals(), loc)
-
               mystr+=str(loc["myvalue"]) if loc["myvalue"] is not None else ""
               mystr+=k[1]
           return mystr
@@ -75,10 +73,14 @@ class RenderFigure():
 
                 k=j.split("%>")
                 loc={"paspremier":paspremier,as_: x,"index":i,  "params": self.params,"render_collection":self.render_collection,"dbSong":self.dbSong}
-                print(k[0], "content render")
-                l=exec("myvalue="+k[0], globals(), loc)
-                mystr+=str(loc["myvalue"])
-                mystr+=k[1]
+                print(dict(x))
+                if k[0]:
+                  print(k[0], "content render")
+                  print(k[0])
+                  l=exec("myvalue="+k[0], globals(), loc)
+                  mystr+=str(loc["myvalue"])
+                if k[1]:
+                  mystr+=k[1]
             i+=1
             paspremier=True
         return mystr
@@ -129,6 +131,15 @@ class RenderFigure():
     def set_json(self,x):
         self.json=True
         self.body=(x).encode("utf-8")
+    def render_my_json(self,filename):
+
+        self.body=filename
+        self.body=self.render_body()
+        try:
+          return self.body.encode("utf-8")
+        except:
+          return self.body
+
     def render_some_json(self,filename):
 
         self.body=open(os.path.abspath(self.path+"/"+filename),"r").read()

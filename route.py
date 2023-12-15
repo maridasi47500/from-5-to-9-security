@@ -49,6 +49,9 @@ class Route():
     def render_some_json(self,x):
         self.Program.set_json(True)
         return self.render_figure.render_some_json(x)
+    def render_my_json(self,x):
+        self.Program.set_json(True)
+        return self.render_figure.render_my_json(x)
     def set_json(self,x):
         self.Program.set_json(x)
         self.render_figure.set_json(self.Program.get_json())
@@ -235,6 +238,7 @@ class Route():
 
     def signin(self,search):
         return self.render_figure.render_figure("user/signin.html")
+
     def save_user(self,params={}):
         myparam=self.get_post_data()(params=("businessaddress","gender","profile","metier", "otheremail", "password","zipcode", "email", "mypic","postaladdress","nomcomplet","password_confirmation"))
         self.user=self.dbUsers.create(myparam)
@@ -245,6 +249,14 @@ class Route():
         else:
             self.set_json("{\"redirect\":\"/e\"}")
             return self.render_figure.render_json()
+    def joueraujeu(self,params={}):
+        self.set_json("{\"redirect\":\"/signin\"}")
+        getparams=("song_id","jeu_id")
+        myparam=self.get_post_data()(params=getparams)
+        self.set_session_params(myparam)
+        #self.set_redirect("/signin")
+        #return self.render_figure.render_redirect()
+        return self.render_figure.render_my_json("{\"redirect\":\"/signin\"}")
     def run(self,redirect=False,redirect_path=False,path=False,session=False,params={},url=False,post_data=False):
         if post_data:
             print("post data")
@@ -284,6 +296,7 @@ class Route():
             print("link route ",path)
             ROUTES={
                     '^/creejeu$': self.monjeu,
+                    '^/joueraujeu$': self.joueraujeu,
                     '^/jouerjeux$': self.jouerjeux,
                     '^/getsongs$': self.getsongs,
                     '^/getlyrics$': self.getlyrics,

@@ -127,19 +127,21 @@ return false;
 			}
 		});
 	});
-	$("#choisischanson").change(function(){
-		$.ajax({
-			url:"/joueraujeu",
-			data:{"id":$(this).val()},
-			type:"get",
-			success:function(data){
-				var x= data.redirect;
-				if (x){
-					window.location=x;
-				}
-			}
-		});
-	});
+	/*if ($("#choisischanson").length > 0){
+	    $("#choisischanson").change(function(){
+	    	$.ajax({
+	    		url:"/joueraujeu",
+	    		data:{"jeu_id": $(this)[0].dataset.jeuId,"song_id":$(this).val()},
+	    		type:"get",
+	    		success:function(data){
+	    			var x= data.redirect;
+	    			if (x){
+	    				window.location=x;
+	    			}
+	    		}
+	    	});
+	    });
+        }*/
 
   
 });

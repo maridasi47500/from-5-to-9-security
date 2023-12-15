@@ -76,7 +76,8 @@ class Song(Model):
           myid=str(self.cur.lastrowid)
           for ligne in Fichier("./uploads",params["lyric"]).ligneparligne():
             print(ligne)
-            self.dbLyric.create({"song_id":myid,"text":ligne})
+            
+            self.dbLyric.create({"song_id":myid,"text":ligne.replace('"','')})
 
 
         except Exception as e:

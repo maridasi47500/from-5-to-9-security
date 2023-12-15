@@ -98,9 +98,11 @@ class Directory():
         print("session : : ",mysession)
         if not mysession["mysession"]:
             self.session["notice"]=""
-        if (not mysession or (not mysession["email"] and not mysession["name"])) and self.url != "/" and not self.redirect and self.url != "/signin" and self.url != "/jouerjeux":
+        if (not mysession or (not mysession["email"] and not mysession["name"])) and self.url != "/" and not self.redirect and self.url != "/signin" and self.url != "/jouerjeux" and self.url != "/joueraujeu":
             print("ok not loged in")
             redi="/"
             self.redirect=redi
             self.html="Moved permanently to <a href=\"{url}\">{url}</a>".format(url=redi)
             self.session["notice"]="vous n'êtes pas connecté"
+            if self.url == "/joueraujeu":
+                self.session["notice"]="connecte-toi pour jouer au jeu"

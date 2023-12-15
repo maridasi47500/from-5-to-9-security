@@ -13,6 +13,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import logging
 from route import Route
 from urllib import parse
+from chaine import Chaine
 from urllib.parse import parse_qs, urlparse
 import re
 import requests
@@ -112,8 +113,9 @@ class S(BaseHTTPRequestHandler):
                         findparam=1
                         path="./uploads"
                         filename=""
-                        filename+=fn[0]
-                        somefilename=fn[0]
+                        myname=Chaine().fichier(fn[0])
+                        filename+=myname
+                        somefilename=myname
                         print("file name : ",filename)
                         fn = os.path.join(path, filename)
                         #\r\

@@ -19,7 +19,7 @@ class Jeu(Model):
         self.con.commit()
         #self.con.close()
     def getall(self):
-        self.cur.execute("select lyric.text,jeu.pic, song.title,artist.name as artistname from jeu left join lyric on lyric.id = jeu.lyric_id left join song on song.id = lyric.song_id left join artist on artist.id = song.artist_id",())
+        self.cur.execute("select jeu.id,lyric.text,jeu.pic, song.title,artist.name as artistname from jeu left join lyric on lyric.id = jeu.lyric_id left join song on song.id = lyric.song_id left join artist on artist.id = song.artist_id",())
 
         row=self.cur.fetchall()
         return row
