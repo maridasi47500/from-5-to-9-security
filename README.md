@@ -1,15 +1,6 @@
-# bienvenue dans radio
-- premiere radio
-- faire 
-```
-```
+# bienvenue dans nasa
+- Ecris de nouveaux script (python,ruby) pour les mission de la nasa
 - lancer:
-
-```
-```
-$ python3 connect4.py
-```
-et
 ```
 $ sh mysite.sh
 ```
@@ -17,3 +8,4 @@ $ sh mysite.sh
 
 
 
+# abc-nasa
