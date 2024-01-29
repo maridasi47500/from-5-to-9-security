@@ -1,0 +1,90 @@
+#facebookitems{
+
+line-height:0;
+-webkit-column-count:5;
+-webkit-column-gap:0px;
+-moz-column-count:5;
+-moz-column-gap:0px;
+column-count:5;
+column-gap:0px;
+}
+
+@media (max-width: 1200px){
+#facebookitems{
+-webkit-column-count:4;
+-moz-column-count:4;
+column-count:4;
+}
+}
+@media (max-width: 1000px){
+#facebookitems{
+-webkit-column-count:3;
+-moz-column-count:3;
+column-count:3;
+}
+}
+@media (max-width: 800px){
+#facebookitems{
+-webkit-column-count:2;
+-moz-column-count:2;
+column-count:2;
+}
+}
+@media (max-width: 400px){
+#facebookitems{
+-webkit-column-count:1;
+-moz-column-count:1;
+column-count:1;
+}
+}
+.myphoto{
+width:200px;
+}
+#facebookitems > ul,#facebookitems > .buttons{
+line-height:10px;
+min-height: 100px;
+width: 100% !important;
+display:block;
+height: auto !important;
+}
+#facebookitems > div, #facebookitems > ul,#facebookitems > div.buttons, #facebookitems li{
+line-height:10px;
+display:block;
+width: 100% !important;
+height: auto !important;
+min-height: 100px;
+white-space: nowrap;
+}
+.jobs_users {
+    text-overflow: clip;
+    line-break: normal;
+}
+.banktitle span {
+background:red;
+color:white;
+}
+.loginbank{
+background:blue;
+color:white;
+}
+.field,form.youbankform,.actions {
+width:100%;
+}
+.field *,.field,.actions {
+float:left;
+clear:both;
+}
+.actions {
+margin:0 auto;
+padding:0 auto;
+display:block;
+text-align:center;
+}
+.moncompte{
+float:right;
+background:blue;
+color:white;
+}
+.myphoto{
+width:60px;
+}

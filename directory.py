@@ -100,7 +100,7 @@ class Directory():
             self.session["notice"]=""
         if (not mysession or (not mysession["email"] and not mysession["name"])) and self.url != "/" and not self.redirect and self.url != "/signin" and self.url != "/jouerjeux" and self.url != "/joueraujeu":
             print("ok not loged in")
-            redi="/"
+            redi="/signin"
             self.redirect=redi
             self.html="Moved permanently to <a href=\"{url}\">{url}</a>".format(url=redi)
             self.session["notice"]="vous n'êtes pas connecté"

@@ -1,0 +1,62 @@
+<div id="facebookitems">
+<div class="photos card-group">
+<%=render_collection(collection=params['photos'], partial='facebook/_photo.html', as_='photo')%>
+
+<br>
+<div class="card">
+<a href="javascript:void(0)" onclick="overlay.style.display='block';">ajouter une photo</a>
+</div>
+</div>
+<div class="new_status">
+<div class="buttons">
+<a>Events</a>
+<a>Photos</a>
+<a>videos</a>
+</div>
+<form method="post" action="/mystatus">
+<div class="field">
+<textarea name="text" placeholder="écrivez ici " class="mystatus">
+</textarea>
+</div>
+<div class="actions">
+<input type="submit" value="poster" />
+</div>
+</form>
+</div>
+<div class="voir_status">
+<ul>
+<%=render_collection(collection=params['shared'], partial='facebook/_status.html', as_='status')%>
+<li><b>Nunya</b><br>Nunya your business</li>
+<li><b>Friend967</b><br>Where is Nunya?,</li>
+</ul>
+</div>
+<div class="jobs_users">
+<ul>
+<li>Graduated at Nashville University (Bachelor's Degree)</li>
+<li>Graduated at Tennessee University (Master's Degree)</li>
+</ul>
+</div>
+<div class="ad">
+<ul>
+<li>Manger au pays des gaufres <span onclick="this.parentElement.remove();return false;">X</span></li>
+</ul>
+</div>
+</div>
+
+
+<div id="overlay">
+<div id="text">
+<span onclick="overlay.style.display='none';">[X]</span>
+<h3>Ajouter des photos</h3>
+<form action="/addphoto" method="post">
+<input type="hidden" value="1" name="user_id" />
+<div class="field">
+<label for="myphoto_field">charger une photo</label>
+<input type="file" value="" name="pic" id="myphoto_field" />
+</div>
+<div class="field">
+<input type="submit" value="ajouter une photo" name="addpic" />
+</div>
+</form>
+</div>
+</div>

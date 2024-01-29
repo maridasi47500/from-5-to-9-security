@@ -1,6 +1,7 @@
 import re
 import os
 import traceback
+from executeprogram import Executeprogram
 from artist import Artist
 from song import Song
 from cado import Cado
@@ -72,7 +73,7 @@ class RenderFigure():
                     continue
 
                 k=j.split("%>")
-                loc={"paspremier":paspremier,as_: x,"index":i,  "params": self.params,"render_collection":self.render_collection,"dbSong":self.dbSong}
+                loc={"Executeprogram":Executeprogram,"paspremier":paspremier,as_: x,"index":i,  "params": self.params,"render_collection":self.render_collection,"dbSong":self.dbSong}
                 print(dict(x))
                 if k[0]:
                   print(k[0], "content render")

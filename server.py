@@ -230,14 +230,16 @@ class S(BaseHTTPRequestHandler):
         self._set_response(redirect=myProgram.get_redirect(),cookies=req.cookies,pic=myProgram.get_pic(),js=myProgram.get_js(),css=myProgram.get_css(),json=myProgram.get_json())
         self.wfile.write(myProgram.get_html())
 
-def run(server_class=ThreadedHTTPServer, handler_class=S, port=8081):
-    logging.info('Starting httpd...\n'+str(port))
-    _test(handler_class,server_class,port=port)
+def run(server_class=ThreadedHTTPServer, handler_class=S, port=8081,host="0.0.0.0"):
+    logging.info('Starting httpd...\n'+str(host)+":"+str(port))
+    _test(handler_class,server_class,port=port,bind=host)
 
 if __name__ == '__main__':
     from sys import argv
 
-    if len(argv) == 2:
+    if len(argv) == 3:
+        run(port=int(argv[1]),host=(argv[2]))
+    elif len(argv) == 2:
         run(port=int(argv[1]))
     else:
         run()

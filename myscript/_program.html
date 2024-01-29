@@ -1,0 +1,8 @@
+<div class="carousel-item <%="" if paspremier else "active"%>">
+      <p><%=Executeprogram(missionscript["script"]).run().replace("\n","<br>")%></p>
+      <p>
+<%=missionscript["type"]%> |  
+<%=missionscript["target"]%> |  
+<%=missionscript["program"]%>
+</p>
+    </div>

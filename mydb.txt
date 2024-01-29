@@ -1,0 +1,36 @@
+mission type
+MISSION TYPES
+Airborne Science
+Analog Field Testing
+Asteroid Deflection
+Atmospheric Probe
+Balloon
+Commercial Crew
+Commercial Resupply
+Communications & Navigation
+Demonstration Mission
+Earth Observation
+Experiment
+Experiment & Instrument
+Flyby
+Ground-based Telescope
+Helicopter & Rotorcraft
+Human Spaceflight
+Impact
+Instrument
+ISS Expedition
+Lander
+Orbiter
+Probe
+Rover
+Sample Return
+SmallSat & CubeSat
+Sounding Rocket
+Space Environment
+Space Telescope & Observatory
+Supersonic Research
+Technology Demonstration
+Weather Satellite
+
+
+

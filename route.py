@@ -3,15 +3,12 @@ from render_figure import RenderFigure
 from myscript import Myscript
 from user import User
 from myrecording import Myrecording
-from gagnant import Gagnant
-from song import Song
-from cado import Cado
-from lyric import Lyric
 from artist import Artist
 from jeu import Jeu
+from mystatus import Mystatus
+from photo import Photo
 
 
-from song import Song
 from mypic import Pic
 from javascript import Js
 from stylesheet import Css
@@ -27,12 +24,10 @@ class Route():
         self.mysession={"notice":None,"email":None,"name":None}
         self.dbScript=Myscript()
         self.dbRecording=Myrecording()
-        self.dbSong=Song()
+        self.dbMystatus=Mystatus()
+        self.dbPhoto=Photo()
         self.dbJeu=Jeu()
         self.dbArtist=Artist()
-        self.dbLyric=Lyric()
-        self.dbGagnant=Gagnant()
-        self.dbCado=Cado()
         self.render_figure=RenderFigure(self.Program)
         self.getparams=("id",)
     def set_post_data(self,x):
@@ -83,8 +78,6 @@ class Route():
         self.render_figure.set_param("scripts",hi)
         return self.render_figure.render_figure("welcome/chat.html")
     def welcome(self,search):
-        hi=self.dbScript.getall()
-        self.render_figure.set_param("scripts",hi)
         return self.render_figure.render_figure("welcome/index.html")
     def audio_save(self,search):
         myparam=self.get_post_data()(params=("recording",))
@@ -102,6 +95,20 @@ class Route():
         a=self.scriptpython(hi["name"]).lancer()
         return self.render_some_json("welcome/monscript.json")
 
+    def addphoto(self,search):
+        myparam=self.get_post_data()(params=("user_id","pic",))
+        hi=self.dbPhoto.create(myparam)
+        self.render_figure.set_param("redirect","/post_hom_office")
+        return self.render_some_json("welcome/redirect.json")
+    def mystatus(self,search):
+        myparam=self.get_post_data()(params=("text",))
+        hi=self.dbMystatus.create(myparam)
+        self.render_figure.set_param("redirect","/post_hom_office")
+        return self.render_some_json("welcome/redirect.json")
+    def new1(self,search):
+        myparam=self.get_post_data()(params=("script","missiontarget_id","missiontype_id","missionprogram_id",))
+        #hi=self.dbMissionscript.create(myparam)
+        return self.render_some_json("welcome/mypic.json")
     def monscript(self,search):
         myparam=self.get_post_data()(params=("name","content",))
         hey=self.dbCommandline.create(myparam)
@@ -115,25 +122,20 @@ class Route():
     def hello(self,search):
         print("hello action")
         return self.render_figure.render_figure("welcome/index.html")
-    def passage(self,myscrit):
-        filename=myscrit["title"][0].replace(".mp3","").split("/")[-1]
-        current_dateTime=datetime.now()
-        song=Song().save_heure_passage((filename,current_dateTime))
-        self.render_figure.set_param("title", song["title"])
-        self.render_figure.set_param("artist", song["artist"])
-        self.render_figure.set_param("filename", song["filename"])
-        self.render_figure.set_param("time", str(song["time"]))
-        return self.render_some_json(Fichier("./welcome","chansonpassages.json").lire())
-    def jouerchanson(self,myscrit):
-        mylist=os.listdir("../radiohaker/public/uploads")
-        k=random.randrange(0,(len(mylist) - 1))
-        filename=mylist[k]
-        print("filename =",filename)
-        self.render_figure.set_param("filename", "/uploads/"+filename)
-        song=Song().get_song((filename.replace(".mp3",""),))
-        self.render_figure.set_param("title", song["title"])
-        self.figure.set_param("artist", song["artist"])
-        self.render_some_json(Fichier("./welcome","chansons.json").lire())
+    def tweet_details(self,search):
+        print("hello action")
+        return self.render_figure.render_figure("twitter/tweet.html")
+    def fill_in_inbox(self,search):
+        print("hello action")
+        return self.render_figure.render_figure("email/email.html")
+    def post_hom_office(self,search):
+        print("hello action")
+        self.render_figure.set_param("shared",self.dbMystatus.getall())
+        self.render_figure.set_param("photos",self.dbPhoto.getall())
+        return self.render_figure.render_figure("facebook/page.html")
+    def youbank(self,search):
+        print("hello action")
+        return self.render_figure.render_figure("bank/youbank.html")
     def delete_user(self,params={}):
         getparams=("id",)
         myparam=self.post_data(self.getparams)
@@ -155,6 +157,9 @@ class Route():
     def myusers(self,params={}):
         self.render_figure.set_param("users",User().getall())
         return self.render_figure.render_figure("user/users.html")
+    def mypics(self,params={}):
+        self.render_figure.set_param("pics",self.dbFish.getall())
+        return self.render_figure.render_figure("fish/fishes.html")
     def update_user(self,params={}):
         myparam=self.post_data(self.getparams)
         self.user=self.dbUsers.update(params)
@@ -174,12 +179,6 @@ class Route():
         return self.render_figure.render_json()
     def nouveau(self,search):
         return self.render_figure.render_figure("welcome/new.html")
-    def chanson(self,params={}):
-        myparam=self.get_post_data()(params=("title","artist","file","lyric"))
-
-
-        hey=self.dbSong.create(myparam)
-        return self.render_some_json("welcome/create.json")
     def getlyrics(self,params={}):
         getparams=("id",)
 
@@ -187,7 +186,6 @@ class Route():
         myparam=self.get_this_get_param(getparams,params)
         print("my param :",myparam)
         try:
-          hey=self.dbLyric.getbysongid(myparam["id"])
           print("hey",hey)
           if not hey:
             hey=[]
@@ -196,29 +194,9 @@ class Route():
 
         self.render_figure.set_param("lyrics",hey)
         return self.render_some_json("welcome/lyrics.json")
-    def getsongs(self,params={}):
-        getparams=("id",)
-
-       
-        myparam=self.get_this_get_param(getparams,params)
-        print("my param :",myparam)
-        try:
-          hey=self.dbSong.getbyartistid(myparam["id"])
-          print("hey",hey)
-          if not hey:
-            hey=[]
-        except:
-          hey=[]
-
-        self.render_figure.set_param("songs",hey)
-        return self.render_some_json("welcome/songs.json")
     def photoartist(self,params={}):
         myparam=self.get_post_data()(params=("pic","id",))
         hey=self.dbArtist.update(myparam)
-        return self.render_some_json("welcome/create.json")
-    def cadeau(self,params={}):
-        myparam=self.get_post_data()(params=("pic","name"))
-        hey=self.dbCado.create(myparam)
         return self.render_some_json("welcome/create.json")
     def jouerjeux(self,search):
         return self.render_figure.render_figure("welcome/jeu.html")
@@ -229,12 +207,6 @@ class Route():
         print(hi)
         self.render_figure.set_param("redirect","/jouerjeux")
         return self.render_some_json("welcome/redirect.json")
-    def gagnant(self,search):
-        myparam=self.get_post_data()(params=("name","pic",))
-
-        hi=self.dbGagnant.create(myparam)
-        print(hi)
-        return self.render_some_json("welcome/create.json")
 
     def signin(self,search):
         return self.render_figure.render_figure("user/signin.html")
@@ -276,6 +248,9 @@ class Route():
         if path and path.endswith("png"):
             self.Program=Pic(path)
             self.Program.set_path("./")
+        elif path and path.endswith("jpeg"):
+            self.Program=Pic(path)
+            self.Program.set_path("./")
         elif path and path.endswith("gif"):
             self.Program=Pic(path)
             self.Program.set_path("./")
@@ -295,32 +270,18 @@ class Route():
             path=path.split("?")[0]
             print("link route ",path)
             ROUTES={
-                    '^/creejeu$': self.monjeu,
-                    '^/joueraujeu$': self.joueraujeu,
-                    '^/jouerjeux$': self.jouerjeux,
-                    '^/getsongs$': self.getsongs,
-                    '^/getlyrics$': self.getlyrics,
-                    '^/photoartist$': self.photoartist,
+                    '^/tweet_details$': self.tweet_details,
+                    '^/addphoto$': self.addphoto,
+                    '^/mystatus$': self.mystatus,
+                    '^/fill_in_inbox$': self.fill_in_inbox,
+                    '^/post_hom_office$': self.post_hom_office,
+                    '^/youbank$': self.youbank,
                     '^/new$': self.nouveau,
-                    '^/gagnant$': self.gagnant,
-                    '^/chanson$': self.chanson,
-                    '^/cadeau$': self.cadeau,
-                    '^/lancerscript$': self.lancerscript,
-                    '^/allscript$': self.allscript,
                     '^/welcome$': self.welcome,
-                    '^/chat$': self.chat,
                     '^/signin$': self.signin,
-                    '^/audio_save$': self.audio_save,
-                    '^/recordsomething$': self.enregistrer,
-                    r"^/songs/jouerunechanson$":self.jouerchanson,
-                    r"^/songs/playmusique1$":self.jouerchanson,
-                    r"^/songs/playmusique$":self.jouerchanson,
                     '^/logmeout$':self.logout,
                                         '^/save_user$':self.save_user,
                                                             '^/update_user$':self.update_user,
-                    r"^/songs/musique$":self.jouerchanson,
-                    r"^/passage$":self.passage,
-                    '^/monscript$': self.monscript,
                     "^/seeuser/([0-9]+)$":self.seeuser,
                                         "^/edituser/([0-9]+)$":self.edit_user,
                                                             "^/deleteuser/([0-9]+)$":self.delete_user,
@@ -344,7 +305,7 @@ class Route():
 
                    except Exception:  
                        self.Program.set_html(html="<p>une erreur s'est produite "+str(traceback.format_exc())+"</p><a href=\"/\">retour à l'accueil</a>")
-                   self.Program.redirect_if_not_logged_in()
+                   #self.Program.redirect_if_not_logged_in()
                    return self.Program
                else:
                    self.Program.set_html(html="<p>la page n'a pas été trouvée</p><a href=\"/\">retour à l'accueil</a>")
