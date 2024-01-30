@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="fr">
+<html manifest="cache.manifest" lang="fr">
 
 
 
@@ -97,10 +97,17 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
+<div class="d-flex">
+                            <%="<form action=\"/logmeout\" method=\"post\"><input value=\"se deconnecter\" type=\"submit\"/></form>" if session['name'] != "" else ""%>
+
+                                    <%="bienvenue "+session['name'] if session['name'] != "" else ""%>
+
+            </div>
     <a class="navbar-toggler" type="a" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a type="a" href="/post_hom_office" class="navitemnavbar"
@@ -136,10 +143,10 @@
   &#128038;
 </a>
         <li class="nav-item">
-          <a type="a" class="navitemnavbar"
+          <a type="a" href="/fill_in_inbox" class="navitemnavbar"
         data-bs-toggle="tooltip" data-bs-placement="top"
         data-bs-custom-class="custom-tooltip"
-        data-bs-title="check mail in my inbox">
+        data-bs-title="vérifier ma boit mail">
   &#128231;
 </a>
         </li>
@@ -212,6 +219,7 @@
   <script src="/js/post.js"></script>
   <script src="/js/main.js"></script>
   <script src="/js/tennessee.js"></script>
+  <script src="/js/loadapp.js"></script>
 
 
 

@@ -43,7 +43,7 @@ class Email(Model):
         color=random.choice(["red","blue","yellow","green","purple","orange","brown","grey","rose"])
         size=random.choice(["3","5","7","9","11","13"])
         mytype=random.choice(["solid","dotted"])
-        mytext="<div style='border-color:%spx %s %s;'>" % (size,color,mytype)
+        mytext="<div style='border:%spx %s %s;'>" % (size,color,mytype)
         subject=""
         if choice == "prize_event":
           subject+="vous êtes le gagnant"
@@ -55,7 +55,7 @@ class Email(Model):
           subject+="vous avez gagné un cadeau "
           link=random.choice(["http://"+gift.replace(" ","")+".com"])
           phrase=random.choice(["Félicitations ! vous avez gagné %s"])
-          mytext+=phrase
+          mytext+=phrase % gift
           phrase1=random.choice(["Aidez-nous","Votre avis compte"])
           phrasecliquez=random.choice(["Répondez à un sondage pour réclamer votre %s","vous avez bien gagné un %s, remplissez ce formulaire "])
           mytext+=phrasecliquez % gift
@@ -87,7 +87,9 @@ class Email(Model):
         except Exception as e:
           print("my error"+str(e))
         azerty={}
+        azerty["id"]=myid
         azerty["email_id"]=myid
+        azerty["subject"]=subject
         azerty["text"]=mytext
         azerty["notice"]="votre email a été ajouté"
         return azerty

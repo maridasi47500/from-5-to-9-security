@@ -8,7 +8,7 @@ from jeu import Jeu
 from mystatus import Mystatus
 from photo import Photo
 from tweet import Tweet
-from email import Email
+from myemail import Email
 
 
 from mypic import Pic
@@ -99,12 +99,27 @@ class Route():
         a=self.scriptpython(hi["name"]).lancer()
         return self.render_some_json("welcome/monscript.json")
 
+    def cartedidentite(self,search):
+        self.Program.set_nocache(True)
+        print("carte user")
+        print("user  ",self.Program.get_session())
+        userid=self.Program.get_session_param("user_id")
+        print("user id ",userid)
+
+        if userid != "":
+          self.render_figure.set_param("user",self.dbUsers.getbyid(userid))
+          return self.render_figure.render_figure("user/carte.html")
+        else:
+          self.set_redirect("/youbank")
+          self.set_my_session({"notice":"vous n'êtes pas connecté à la banque"})
+          return self.render_figure.render_redirect()
+
     def check_mailbox(self,search):
         hi=self.dbEmail.createfake()
         hi1=self.dbEmail.createfake()
         hi2=self.dbEmail.createfake()
         hi4=self.dbEmail.createfake()
-        self.render_figure.set_param("emails",[hi,hi1,hi2,hi4])
+        self.render_figure.set_param("emails",(hi,hi1,hi2,hi4))
         return self.render_some_json("email/emails.json")
     def tweeter(self,search):
         myparam=self.get_post_data()(params=("user_id","text",))
@@ -144,13 +159,16 @@ class Route():
         return self.render_figure.render_figure("twitter/tweet.html")
     def fill_in_inbox(self,search):
         print("hello action")
-        self.render_figure.render_figure("emails",self.dbEmail.getall())
+        self.render_figure.set_param("emails",self.dbEmail.getall())
         return self.render_figure.render_figure("email/email.html")
     def post_hom_office(self,search):
         print("hello action")
         self.render_figure.set_param("shared",self.dbMystatus.getall())
         self.render_figure.set_param("photos",self.dbPhoto.getall())
         return self.render_figure.render_figure("facebook/page.html")
+    def youbank_inscription(self,search):
+        print("hello action")
+        return self.render_figure.render_figure("bank/signup.html")
     def youbank(self,search):
         print("hello action")
         return self.render_figure.render_figure("bank/youbank.html")
@@ -190,15 +208,15 @@ class Route():
         self.set_session(self.user)
         self.set_redirect(("/seeuser/"+params["id"][0]))
     def login(self,s):
-        search=self.get_post_data()(params=("email","password"))
-        self.user=self.dbUsers.getbyemailpw(search["email"],search["password"])
+        search=self.get_post_data()(params=("email","password","password_security"))
+        self.user=self.dbUsers.getbyemailpwsecurity(search["email"],search["password"],search["password_security"])
         print("user trouve", self.user)
-        if self.user["email"]:
+        if self.user["email"] != "":
+            print("redirect carte didentite")
             self.set_session(self.user)
-            self.set_session(self.user)
-            self.set_json("{\"redirect\":\"/chat\"}")
+            self.set_json("{\"redirect\":\"/cartedidentite\"}")
         else:
-            self.set_json("{\"redirect\":\"/signin\"}")
+            self.set_json("{\"redirect\":\"/youbank\"}")
             print("session login",self.Program.get_session())
         return self.render_figure.render_json()
     def nouveau(self,search):
@@ -236,14 +254,14 @@ class Route():
         return self.render_figure.render_figure("user/signin.html")
 
     def save_user(self,params={}):
-        myparam=self.get_post_data()(params=("businessaddress","gender","profile","metier", "otheremail", "password","zipcode", "email", "mypic","postaladdress","nomcomplet","password_confirmation"))
+        myparam=self.get_post_data()(params=("email","password","password_security","nomcomplet"))
         self.user=self.dbUsers.create(myparam)
-        if self.user["email"]:
+        if self.user["user_id"]:
             self.set_session(self.user)
-            self.set_json("{\"redirect\":\"/welcome\"}")
+            self.set_json("{\"redirect\":\"/youbank\"}")
             return self.render_figure.render_json()
         else:
-            self.set_json("{\"redirect\":\"/e\"}")
+            self.set_json("{\"redirect\":\"/youbank_inscription\"}")
             return self.render_figure.render_json()
     def joueraujeu(self,params={}):
         self.set_json("{\"redirect\":\"/signin\"}")
@@ -294,6 +312,7 @@ class Route():
             path=path.split("?")[0]
             print("link route ",path)
             ROUTES={
+                    '^/cartedidentite': self.cartedidentite,
                     '^/check_mailbox': self.check_mailbox,
                     '^/tweeter$': self.tweeter,
                     '^/tweet_details$': self.tweet_details,
@@ -302,6 +321,7 @@ class Route():
                     '^/fill_in_inbox$': self.fill_in_inbox,
                     '^/post_hom_office$': self.post_hom_office,
                     '^/youbank$': self.youbank,
+                    '^/youbank_inscription$': self.youbank_inscription,
                     '^/new$': self.nouveau,
                     '^/welcome$': self.welcome,
                     '^/signin$': self.signin,
@@ -328,8 +348,6 @@ class Route():
                    params["routeparams"]=x.groups()
                    try:
                        self.Program.set_html(html=mycase(params))
-
-
                    except Exception:  
                        self.Program.set_html(html="<p>une erreur s'est produite "+str(traceback.format_exc())+"</p><a href=\"/\">retour à l'accueil</a>")
                    #self.Program.redirect_if_not_logged_in()

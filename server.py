@@ -8,6 +8,7 @@ Usage::
     ./server.py [<port>]
 """
 
+
 import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import logging
@@ -21,6 +22,7 @@ req = requests.Session()
 req.cookies.clear()
 req.cookies["email"]=""
 req.cookies["name"]=""
+req.cookies["user_id"]=""
 req.cookies["notice"]=""
 from urllib.parse import urlencode
 # my server
@@ -28,11 +30,13 @@ import time, socket, threading
 from http.server import test as _test
 from socketserver     import ThreadingMixIn
 from http.cookies import SimpleCookie
+
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
             pass
 
 
 class S(BaseHTTPRequestHandler):
+    paspremiercookie=False
     def myline(self,x):
         print("======",x,"======")
     def deal_post_data(self,params):
@@ -171,6 +175,12 @@ class S(BaseHTTPRequestHandler):
             print(e,"my exception")
         return myhash
     def _set_response(self,redirect=False,cookies=False,pic=False,js=False,css=False,json=False):
+        #if not self.paspremiercookie:
+        #  self.paspremiercookie=True
+        #  self.send_header('Clear-Site-Data', 'cache, cookies, storage, executionContexts')
+          #self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
+          #self.send_header('Pragma', 'no-cache')
+          #self.send_header('Expires', '0')
         if redirect:
           self.send_response(301)
           self.send_header('Status', '301 Redirect')
@@ -206,6 +216,9 @@ class S(BaseHTTPRequestHandler):
         if sess:
             for cookie in req.cookies:
                     cookie.value = sess[cookie.name]
+        if sess and not sess["mysession"]:
+            for cookie in req.cookies:
+                    cookie.value = ""
 
         self._set_response(redirect=myProgram.get_redirect(),cookies=req.cookies,pic=myProgram.get_pic(),js=myProgram.get_js(),css=myProgram.get_css(),json=myProgram.get_json())
         self.wfile.write(myProgram.get_html())

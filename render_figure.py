@@ -53,9 +53,15 @@ class RenderFigure():
               for n in self.params:
                   loc[n]=self.params[n]
               print(k[0])
-              l=exec("myvalue="+k[0], globals(), loc)
-              mystr+=str(loc["myvalue"]) if loc["myvalue"] is not None else ""
-              mystr+=k[1]
+              try:
+                l=exec("myvalue="+k[0], globals(), loc)
+                mystr+=str(loc["myvalue"]) if loc["myvalue"] is not None else ""
+                mystr+=k[1]
+              except:
+                l=exec("myvalue='erreurici pour "+k[0]+"'", globals(), loc)
+                mystr=str(loc["myvalue"]) if loc["myvalue"] is not None else ""
+
+
           return mystr
         except Exception:
           mystr="erreur : "+traceback.format_exc()

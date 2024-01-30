@@ -1,7 +1,9 @@
 <div id="overlay" style="display:block;">
 <div id="text">
+<span onclick="overlay.style.display='none';">[X]</span>
 <p>
 <span class="nbemails">
+<%=len(params['emails'])%>
 </span>
 emails reçus
 </p>
@@ -9,6 +11,6 @@ emails reçus
 </div>
 </div>
 <h1>Inbox</h1>
-<ul>
-<%=render_collection(collection=params['emails'], partial='email/_emaill.html', as_='email')%>
+<ul class="inboxmail">
+<%=render_collection(collection=params['emails'], partial='email/_email.html', as_='email')%>
 </ul>

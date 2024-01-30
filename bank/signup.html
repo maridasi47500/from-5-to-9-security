@@ -1,15 +1,18 @@
 <h1 class="banktitle">
-<span class="moncompte"><a href="/youbank_inscription">inscription à la banque</a></span>
 <span>YOU</span>BANK
 
 </h1>
 <p class="loginbank">
-Connectez vous à votre compte
+S'inscrire
 </p>
 
-<span class="moncompte">Mon compte</span>
+<span class="moncompte">Création de mon compte</span>
 
-<form action="/login" method="post" class="youbankform">
+<form class="youbankforminscription" action="/save_user" method="post">
+<div class="field">
+<label for="my_nom_complet">Nom complet</label>
+<input type="text" id="my_nom_complet" name="nomcomplet" />
+</div>
 <div class="field">
 <label for="my_mail">Email</label>
 <input type="text" id="my_mail" name="email" />
@@ -17,6 +20,10 @@ Connectez vous à votre compte
 <div class="field">
 <label for="password">Password</label>
 <input type="password" id="my_password" name="password" />
+</div>
+<div class="field">
+<label for="password_confirmation">Password confirmation</label>
+<input type="password" id="my_password_confirmation" name="password_confirmation" />
 </div>
 <div class="field">
 <label for="security_password">Password security</label>

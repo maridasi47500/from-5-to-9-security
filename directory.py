@@ -3,15 +3,16 @@ class Directory():
     pic=False
     redirect=False
     js=False
+    nocache=False
     json=False
     css=False
     def __init__(self, title):
         self.title=title
-        self.session={"email":None,"name":None,"notice":None}
+        self.session={"email":None,"user_id":"","name":None,"notice":None}
         self.path="./"
         self.html=""
         self.url=""
-        self.mesparams=["email","name","notice"]
+        self.mesparams=["email","name","user_id","notice"]
         self.redirect=False
     def logout(self):
         for x in self.mesparams:
@@ -41,6 +42,11 @@ class Directory():
                 print("erreur session ",x)
                 self.session[x]=""
         self.session["mysession"]=False
+    def get_session_param(self,s):
+        try:
+            return self.session[s]
+        except:
+            return ""
     def set_session_params(self,s):
         for x in s:
             try:
@@ -65,6 +71,10 @@ class Directory():
         return self.css
     def set_css(self,html):
         self.css=html
+    def get_nocache(self):
+        return self.nocache
+    def set_nocache(self,html):
+        self.nocache=html
     def get_json(self):
         return self.json
     def set_json(self,html):
@@ -98,9 +108,9 @@ class Directory():
         print("session : : ",mysession)
         if not mysession["mysession"]:
             self.session["notice"]=""
-        if (not mysession or (not mysession["email"] and not mysession["name"])) and self.url != "/" and not self.redirect and self.url != "/signin" and self.url != "/jouerjeux" and self.url != "/joueraujeu":
+        if (not mysession or (not mysession["user_id"])) and not self.redirect and self.url not in ["/","/youbank","/youbank_inscription"]:
             print("ok not loged in")
-            redi="/signin"
+            redi="/youbank"
             self.redirect=redi
             self.html="Moved permanently to <a href=\"{url}\">{url}</a>".format(url=redi)
             self.session["notice"]="vous n'êtes pas connecté"

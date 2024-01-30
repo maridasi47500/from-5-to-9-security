@@ -49,7 +49,7 @@ return false;
 	return false;
   });
 
-$('form').on('submit', function () {
+$('form:not(.youbankforminscription)').on('submit', function () {
   if (window.filesize > 1024*5) {
     alert('max upload size is 5k');
 return false;
