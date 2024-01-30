@@ -1,0 +1,3 @@
+{"emails":[
+<%=render_collection(collection=params['emails'], partial='email/_email.json', as_='email')%>
+]}

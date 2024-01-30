@@ -1,0 +1,1 @@
+<li><%=email["subject"]%><a href="javascript:void(0)" onclick="$.ajax({url:'/voiremail/<%email["id"]=%>',success:function(data){text.innerHTML=data;}});overlay.style.display='block';">voir l'email</a></li>

@@ -1,20 +1,28 @@
-<div id="oeray">
+
+<span class="left"><button type="button" onclick="overlay.style.display='block';">Nouveau tweet</button></span>
+<ul>
+<%=render_collection(collection=params['tweets'], partial='twitter/_tweet.html', as_='tweet')%>
+</ul>
+<div id="overlay" style="display:block;">
 <div id="text">
-<form action="/tweeter">
+<form action="/tweeter" method="post" class="formtweeter">
+<input type="hidden" name="user_id" value="1"/>
 <div class="myheader">
-<span class="left"><button type="button" >annuler</button></span>
+<span class="left"><button type="button" onclick="overlay.style.display='none';">annuler</button></span>
 <span class="center">Nouveau tweet<br>@hacker_anonymous</span>
-<span class="right"><input type="submit" value="tweeter"/></span>
+<span class="right">
+<input type="submit" value="tweeter"/>
+</span>
 </div>
 <div class="field">
-<textarea name="text"></textarea>
+<textarea maxLength="280" onkeyup="$(this).val($(this).val().replace(/\r?\n/gi,''));$('.nbcaracteresrstant').html(Number(this.maxLength) - Number(this.value.length));" name="text" id="mytweetcontent"></textarea>
 </div>
 <div class="myfooter">
 <span class="left">
 <span class="ajouterphoto">&#128247;</span>
 <span class="ajouterlieu">&#128204;</span>
 </span>
-<span class="right nbcaracteresrstant"></span>
+<span class="right nbcaracteresrstant">280</span>
 </div>
 </form>
 </div>

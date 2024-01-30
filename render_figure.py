@@ -152,6 +152,13 @@ class RenderFigure():
 
     def render_json(self):
         return self.body
+    def render_only_figure(self,filename):
+        self.body=open(os.path.abspath(self.path+"/"+filename),"r").read()
+        self.body=self.render_body()
+        try:
+          return self.body.encode("utf-8")
+        except:
+          return self.body
     def render_figure(self,filename):
         self.body+=open(os.path.abspath(self.path+"/"+filename),"r").read()
         if self.mytemplate is not None:

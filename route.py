@@ -7,6 +7,8 @@ from artist import Artist
 from jeu import Jeu
 from mystatus import Mystatus
 from photo import Photo
+from tweet import Tweet
+from email import Email
 
 
 from mypic import Pic
@@ -25,7 +27,9 @@ class Route():
         self.dbScript=Myscript()
         self.dbRecording=Myrecording()
         self.dbMystatus=Mystatus()
+        self.dbEmail=Email()
         self.dbPhoto=Photo()
+        self.dbTweet=Tweet()
         self.dbJeu=Jeu()
         self.dbArtist=Artist()
         self.render_figure=RenderFigure(self.Program)
@@ -95,6 +99,18 @@ class Route():
         a=self.scriptpython(hi["name"]).lancer()
         return self.render_some_json("welcome/monscript.json")
 
+    def check_mailbox(self,search):
+        hi=self.dbEmail.createfake()
+        hi1=self.dbEmail.createfake()
+        hi2=self.dbEmail.createfake()
+        hi4=self.dbEmail.createfake()
+        self.render_figure.set_param("emails",[hi,hi1,hi2,hi4])
+        return self.render_some_json("email/emails.json")
+    def tweeter(self,search):
+        myparam=self.get_post_data()(params=("user_id","text",))
+        hi=self.dbTweet.create(myparam)
+        self.render_figure.set_param("redirect","/tweet_details")
+        return self.render_some_json("welcome/redirect.json")
     def addphoto(self,search):
         myparam=self.get_post_data()(params=("user_id","pic",))
         hi=self.dbPhoto.create(myparam)
@@ -124,9 +140,11 @@ class Route():
         return self.render_figure.render_figure("welcome/index.html")
     def tweet_details(self,search):
         print("hello action")
+        self.render_figure.set_param("tweets",self.dbTweet.getall())
         return self.render_figure.render_figure("twitter/tweet.html")
     def fill_in_inbox(self,search):
         print("hello action")
+        self.render_figure.render_figure("emails",self.dbEmail.getall())
         return self.render_figure.render_figure("email/email.html")
     def post_hom_office(self,search):
         print("hello action")
@@ -149,6 +167,12 @@ class Route():
         print("route params")
         self.render_figure.set_param("user",User().getbyid(myparam["id"]))
         return self.render_figure.render_figure("user/edituser.html")
+    def voiremail(self,params={}):
+        getparams=("id",)
+        print("get param, action see my new",getparams)
+        myparam=self.get_this_route_param(getparams,params)
+        self.render_figure.set_param("email",self.dbEmail.getbyid(myparam["id"]))
+        return self.render_figure.render_only_figure("email/voiremail.html")
     def seeuser(self,params={}):
         getparams=("id",)
         print("get param, action see my new",getparams)
@@ -270,6 +294,8 @@ class Route():
             path=path.split("?")[0]
             print("link route ",path)
             ROUTES={
+                    '^/check_mailbox': self.check_mailbox,
+                    '^/tweeter$': self.tweeter,
                     '^/tweet_details$': self.tweet_details,
                     '^/addphoto$': self.addphoto,
                     '^/mystatus$': self.mystatus,
@@ -282,6 +308,7 @@ class Route():
                     '^/logmeout$':self.logout,
                                         '^/save_user$':self.save_user,
                                                             '^/update_user$':self.update_user,
+                    "^/voiremail/([0-9]+)$":self.voiremail,
                     "^/seeuser/([0-9]+)$":self.seeuser,
                                         "^/edituser/([0-9]+)$":self.edit_user,
                                                             "^/deleteuser/([0-9]+)$":self.delete_user,

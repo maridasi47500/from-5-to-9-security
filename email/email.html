@@ -8,3 +8,7 @@ emails reçus
 
 </div>
 </div>
+<h1>Inbox</h1>
+<ul>
+<%=render_collection(collection=params['emails'], partial='email/_emaill.html', as_='email')%>
+</ul>

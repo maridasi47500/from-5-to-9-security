@@ -88,3 +88,23 @@ color:white;
 .myphoto{
 width:60px;
 }
+.formtweeter{
+width:100%;
+}
+
+.formtweeter .myheader, .formtweeter .myfooter{
+width:100%;
+position:relative;
+padding:0 auto;
+margin:0 auto;
+text-align:center;
+}
+.formtweeter .right{
+float:right;
+}
+.formtweeter .left{
+float:left;
+}
+.formtweeter textarea{
+width:100%;
+}
