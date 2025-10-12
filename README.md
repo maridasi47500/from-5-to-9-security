@@ -7,3 +7,6 @@ $ sh mysite.sh
 - visit http://localhost:8081
 
 
+![alt text](bank1.png) 
+![alt text](bank2.png) 
+![alt text](bank3.png) 

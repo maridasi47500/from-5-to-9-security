@@ -312,8 +312,8 @@ class Route():
             path=path.split("?")[0]
             print("link route ",path)
             ROUTES={
-                    '^/cartedidentite': self.cartedidentite,
-                    '^/check_mailbox': self.check_mailbox,
+                    '^/cartedidentite$': self.cartedidentite,
+                    '^/check_mailbox$': self.check_mailbox,
                     '^/tweeter$': self.tweeter,
                     '^/tweet_details$': self.tweet_details,
                     '^/addphoto$': self.addphoto,
@@ -350,7 +350,7 @@ class Route():
                        self.Program.set_html(html=mycase(params))
                    except Exception:  
                        self.Program.set_html(html="<p>une erreur s'est produite "+str(traceback.format_exc())+"</p><a href=\"/\">retour à l'accueil</a>")
-                   #self.Program.redirect_if_not_logged_in()
+                   ##self.Program.redirect_if_not_logged_in()
                    return self.Program
                else:
                    self.Program.set_html(html="<p>la page n'a pas été trouvée</p><a href=\"/\">retour à l'accueil</a>")
